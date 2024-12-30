@@ -1,0 +1,4 @@
+rootProject.name = 'projekt'
+include 'projekt-generacjaBazyDanych'
+include 'projekt-updateBazyDanych'
+

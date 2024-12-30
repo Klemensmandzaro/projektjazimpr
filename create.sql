@@ -1,0 +1,13 @@
+create table item (blizzard_id bigint, id bigint not null auto_increment, item_class_id bigint, item_media_id bigint, item_set_id bigint, item_stats_id bigint, item_subclass_id bigint, description varchar(255), name varchar(255), primary key (id)) engine=InnoDB;
+create table item_class (id bigint not null auto_increment, class_name varchar(255), primary key (id)) engine=InnoDB;
+create table item_media (id bigint not null auto_increment, icon_url varchar(255), primary key (id)) engine=InnoDB;
+create table item_set (id bigint not null auto_increment, set_name varchar(255), primary key (id)) engine=InnoDB;
+create table item_stats (agility integer, armor integer, block integer, cooldown_reduction integer, critical_strike integer, dodge integer, haste integer, healing integer, health_regeneration integer, intellect integer, mana integer, mana_regeneration integer, mastery integer, stamina integer, strength integer, versatility integer, id bigint not null auto_increment, primary key (id)) engine=InnoDB;
+create table item_subclass (id bigint not null auto_increment, subclass_name varchar(255), primary key (id)) engine=InnoDB;
+alter table item add constraint UKjidguhkhfwnmper9qam9pd9ud unique (item_media_id);
+alter table item add constraint UKn97vflhnvk7mttfh69rwp6ape unique (item_stats_id);
+alter table item add constraint FKhc10j8kpau312bmp2oa2k5tl7 foreign key (item_class_id) references item_class (id);
+alter table item add constraint FKtpf6xe8gofj3yywatdw0l19un foreign key (item_media_id) references item_media (id);
+alter table item add constraint FKn4b0yw5earv5c0qww3s1ng8sb foreign key (item_set_id) references item_set (id);
+alter table item add constraint FKma002dx0ih3lmu46o58xufifo foreign key (item_stats_id) references item_stats (id);
+alter table item add constraint FK59l645fqxtw26ctcmdclg1rke foreign key (item_subclass_id) references item_subclass (id);

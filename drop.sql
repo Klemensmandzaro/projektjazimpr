@@ -1,0 +1,11 @@
+alter table item drop foreign key FKhc10j8kpau312bmp2oa2k5tl7;
+alter table item drop foreign key FKtpf6xe8gofj3yywatdw0l19un;
+alter table item drop foreign key FKn4b0yw5earv5c0qww3s1ng8sb;
+alter table item drop foreign key FKma002dx0ih3lmu46o58xufifo;
+alter table item drop foreign key FK59l645fqxtw26ctcmdclg1rke;
+drop table if exists item;
+drop table if exists item_class;
+drop table if exists item_media;
+drop table if exists item_set;
+drop table if exists item_stats;
+drop table if exists item_subclass;
