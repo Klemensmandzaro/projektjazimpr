@@ -15,6 +15,16 @@ public class ItemStatsDto {
     private Integer Dodge;
     private Integer HealthRegeneration;
     private Integer ManaRegeneration;
+    private String OtherType;
+    private Integer Arcane_resistance;
+    private Integer Fire_resistance;
+    private Integer Frost_resistance;
+    private Integer Nature_resistance;
+    private Integer Shadow_resistance;
+    private Integer Crit_ranged;
+    private Integer Parry;
+    private Integer Spell_power;
+    private Integer Spirit;
 
     public Integer getStrength() {
         return Strength;
@@ -120,5 +130,84 @@ public class ItemStatsDto {
         ManaRegeneration = manaRegeneration;
     }
 
+    public String getOtherType() {
+        return OtherType;
+    }
+
+    public void setOtherType(String otherType) {
+        OtherType = otherType;
+    }
+
+    public Integer getArcane_resistance() {
+        return Arcane_resistance;
+    }
+
+    public void setArcane_resistance(Integer arcane_resistance) {
+        Arcane_resistance = arcane_resistance;
+    }
+
+    public Integer getFire_resistance() {
+        return Fire_resistance;
+    }
+
+    public void setFire_resistance(Integer fire_resistance) {
+        Fire_resistance = fire_resistance;
+    }
+
+    public Integer getFrost_resistance() {
+        return Frost_resistance;
+    }
+
+    public void setFrost_resistance(Integer frost_resistance) {
+        Frost_resistance = frost_resistance;
+    }
+
+    public Integer getNature_resistance() {
+        return Nature_resistance;
+    }
+
+    public void setNature_resistance(Integer nature_resistance) {
+        Nature_resistance = nature_resistance;
+    }
+
+    public Integer getShadow_resistance() {
+        return Shadow_resistance;
+    }
+
+    public void setShadow_resistance(Integer shadow_resistance) {
+        Shadow_resistance = shadow_resistance;
+    }
+
+    public Integer getCrit_ranged() {
+        return Crit_ranged;
+    }
+
+    public void setCrit_ranged(Integer crit_ranged) {
+        Crit_ranged = crit_ranged;
+    }
+
+    public Integer getParry() {
+        return Parry;
+    }
+
+    public void setParry(Integer parry) {
+        Parry = parry;
+    }
+
+    public Integer getSpell_power() {
+        return Spell_power;
+    }
+
+    public void setSpell_power(Integer spell_power) {
+        Spell_power = spell_power;
+    }
+
+    public Integer getSpirit() {
+        return Spirit;
+    }
+
+    public void setSpirit(Integer spirit) {
+        Spirit = spirit;
+    }
 }
 

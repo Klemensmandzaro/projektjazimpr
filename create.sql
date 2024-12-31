@@ -2,7 +2,7 @@ create table item (blizzard_id bigint, id bigint not null auto_increment, item_c
 create table item_class (id bigint not null auto_increment, class_name varchar(255), primary key (id)) engine=InnoDB;
 create table item_media (id bigint not null auto_increment, icon_url varchar(255), primary key (id)) engine=InnoDB;
 create table item_set (id bigint not null auto_increment, set_name varchar(255), primary key (id)) engine=InnoDB;
-create table item_stats (agility integer, armor integer, block integer, critical_strike integer, dodge integer, haste integer, health_regeneration integer, intellect integer, mana_regeneration integer, mastery integer, stamina integer, strength integer, versatility integer, id bigint not null auto_increment, primary key (id)) engine=InnoDB;
+create table item_stats (agility integer, arcane_resistance integer, armor integer, block integer, crit_ranged integer, critical_strike integer, dodge integer, fire_resistance integer, frost_resistance integer, haste integer, health_regeneration integer, intellect integer, mana_regeneration integer, mastery integer, nature_resistance integer, parry integer, shadow_resistance integer, spell_power integer, spirit integer, stamina integer, strength integer, versatility integer, id bigint not null auto_increment, other_type varchar(255), primary key (id)) engine=InnoDB;
 create table item_subclass (id bigint not null auto_increment, subclass_name varchar(255), primary key (id)) engine=InnoDB;
 alter table item add constraint UKjidguhkhfwnmper9qam9pd9ud unique (item_media_id);
 alter table item add constraint UKn97vflhnvk7mttfh69rwp6ape unique (item_stats_id);

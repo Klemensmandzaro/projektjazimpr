@@ -199,8 +199,35 @@ public class ItemService {
                     case "dodge_rating":
                         itemStatsDto.setDodge(statValue);
                         break;
+                    case "arcane_resistance":
+                        itemStatsDto.setArcane_resistance(statValue);
+                        break;
+                    case "fire_resistance":
+                        itemStatsDto.setFire_resistance(statValue);
+                        break;
+                    case "frost_resistance":
+                        itemStatsDto.setFrost_resistance(statValue);
+                        break;
+                    case "nature_resistance":
+                        itemStatsDto.setNature_resistance(statValue);
+                        break;
+                    case "shadow_resistance":
+                        itemStatsDto.setShadow_resistance(statValue);
+                        break;
+                    case "spell_power":
+                        itemStatsDto.setSpell_power(statValue);
+                        break;
+                    case "spirit":
+                        itemStatsDto.setSpirit(statValue);
+                        break;
+                    case "parry_rating":
+                        itemStatsDto.setParry(statValue);
+                        break;
+                    case "crit_ranged":
+                        itemStatsDto.setCrit_ranged(statValue);
+                        break;
                     default:
-                        // Obsłuż inne statystyki, jeśli są potrzebne
+                        itemStatsDto.setOtherType(statType);
                         break;
                 }
             }
