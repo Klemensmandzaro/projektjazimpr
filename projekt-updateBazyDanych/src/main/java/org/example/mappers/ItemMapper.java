@@ -54,18 +54,15 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
         itemStats.setAgility(itemDto.getItemStats().getAgility());
         itemStats.setIntellect(itemDto.getItemStats().getIntellect());
         itemStats.setStamina(itemDto.getItemStats().getStamina());
-        itemStats.setMana(itemDto.getItemStats().getMana());
         itemStats.setCriticalStrike(itemDto.getItemStats().getCriticalStrike());
         itemStats.setMastery(itemDto.getItemStats().getMastery());
         itemStats.setVersatility(itemDto.getItemStats().getVersatility());
         itemStats.setHaste(itemDto.getItemStats().getHaste());
-        itemStats.setCooldownReduction(itemDto.getItemStats().getCooldownReduction());
         itemStats.setArmor(itemDto.getItemStats().getArmor());
         itemStats.setDodge(itemDto.getItemStats().getDodge());
         itemStats.setBlock(itemDto.getItemStats().getBlock());
         itemStats.setHealthRegeneration(itemDto.getItemStats().getHealthRegeneration());
         itemStats.setManaRegeneration(itemDto.getItemStats().getManaRegeneration());
-        itemStats.setHealing(itemDto.getItemStats().getHealing());
         item.setItemStats(itemStats);
 
 

@@ -6,18 +6,15 @@ public class ItemStatsDto {
     private Integer Agility;
     private Integer Intellect;
     private Integer Stamina;
-    private Integer Mana;
     private Integer CriticalStrike;
     private Integer Mastery;
     private Integer Versatility;
     private Integer Haste;
-    private Integer CooldownReduction;
     private Integer Armor;
     private Integer Block;
     private Integer Dodge;
     private Integer HealthRegeneration;
     private Integer ManaRegeneration;
-    private Integer Healing;
 
     public Integer getStrength() {
         return Strength;
@@ -51,14 +48,6 @@ public class ItemStatsDto {
         Stamina = stamina;
     }
 
-    public Integer getMana() {
-        return Mana;
-    }
-
-    public void setMana(Integer mana) {
-        Mana = mana;
-    }
-
     public Integer getCriticalStrike() {
         return CriticalStrike;
     }
@@ -89,14 +78,6 @@ public class ItemStatsDto {
 
     public void setHaste(Integer haste) {
         Haste = haste;
-    }
-
-    public Integer getCooldownReduction() {
-        return CooldownReduction;
-    }
-
-    public void setCooldownReduction(Integer cooldownReduction) {
-        CooldownReduction = cooldownReduction;
     }
 
     public Integer getArmor() {
@@ -139,12 +120,5 @@ public class ItemStatsDto {
         ManaRegeneration = manaRegeneration;
     }
 
-    public Integer getHealing() {
-        return Healing;
-    }
-
-    public void setHealing(Integer healing) {
-        Healing = healing;
-    }
 }
 

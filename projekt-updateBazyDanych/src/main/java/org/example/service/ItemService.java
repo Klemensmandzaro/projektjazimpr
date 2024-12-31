@@ -27,7 +27,10 @@ public class ItemService {
 
 
     public ItemService(WebClient.Builder webClientBuilder, ItemRepository itemRepository, ItemMapper itemMapper, ItemClassRepository itemClassRepository, ItemSubclassRepository itemSubclassRepository, ItemSetRepository itemSetRepository) {
-        this.webClient = webClientBuilder.baseUrl("https://us.api.blizzard.com").build();
+        this.webClient = webClientBuilder.baseUrl("https://us.api.blizzard.com")
+                .codecs(configurer -> configurer.defaultCodecs()
+                    .maxInMemorySize(1024 * 1024 * 10 * 2))
+                .build();
         this.itemRepository = itemRepository;
         this.itemMapper = itemMapper;
     }
@@ -35,27 +38,51 @@ public class ItemService {
 
 
     public void fetchAndSaveItems(String accessToken) {
-        int page = 1;
-        boolean hasMorePages = true;
 
-        while (hasMorePages) {
-            int finalPage = page;
-            var response = webClient.get()
-                    .uri(uriBuilder -> uriBuilder
-                            .path("/data/wow/search/item")
-                            .queryParam("namespace", "static-us")
-                            .queryParam("locale", "en_US")
-                            .queryParam("orderby", "id")
-                            .queryParam("_page", finalPage)
-                            .build())
-                    .header("Authorization", "Bearer " + accessToken)
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .block();
+        Long lastItem = getHighestIdFromBlizzard(accessToken);
+
+        Long itemId = 25L;
+        if (itemRepository.findTopByOrderByIdDesc().isPresent())
+        {
+            itemId=itemRepository.findTopByOrderByIdDesc().get().getBlizzardId();
+        }
+
+        while (itemId < lastItem) {
+
+            int page = 1;
+
+            boolean hasMorePages = true;
+
+            while (hasMorePages) {
+                int finalPage = page;
+                Long finalItemId = itemId;
+                var response = webClient.get()
+                        .uri(uriBuilder -> uriBuilder
+                                .path("/data/wow/search/item")
+                                .queryParam("namespace", "static-us")
+                                .queryParam("locale", "en_US")
+                                .queryParam("orderby", "id")
+                                .queryParam("_page", finalPage)
+                                .queryParam("_pageSize", 100)
+                                .queryParam("id", "[" + finalItemId + ",]")
+                                .build())
+                        .header("Authorization", "Bearer " + accessToken)
+                        .retrieve()
+                        .bodyToMono(String.class)
+                        .block();
 
 
-            hasMorePages = processResponse(response, accessToken);
-            page++;
+                hasMorePages = processResponse(response, accessToken);
+                page++;
+            }
+            if (itemRepository.findTopByOrderByIdDesc().isPresent())
+            {
+                itemId=itemRepository.findTopByOrderByIdDesc().get().getBlizzardId();
+            }
+            else
+            {
+                itemId++;
+            }
         }
     }
 
@@ -98,14 +125,17 @@ public class ItemService {
                     try {
                         itemRepository.save(item);
                     } catch (Exception e) {
-                        System.out.println("this item already exists in database");
+                        System.out.println("this item lagging bro");
                     }
+                }
+                else {
+                    System.out.println("this item already exists in database");
                 }
 
             }
 
             // Sprawdź, czy są kolejne strony
-            return !rootNode.path("page").path("is_last_page").asBoolean();
+            return !(rootNode.path("pageCount").asInt() == rootNode.path("page").asInt());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -116,7 +146,7 @@ public class ItemService {
         ItemDto itemDto = new ItemDto();
         itemDto.setBlizzardId(itemNode.path("id").asLong());
         itemDto.setName(itemNode.path("name").path("en_US").asText());
-        itemDto.setDescription(itemNode.path("data").path("description").path("en_US").asText());
+        itemDto.setDescription(itemNode.path("preview_item").path("description").asText());
 
 
         ItemClassDto itemClassDto = new ItemClassDto();
@@ -148,32 +178,26 @@ public class ItemService {
                     case "stamina":
                         itemStatsDto.setStamina(statValue);
                         break;
-                    case "mana":
-                        itemStatsDto.setMana(statValue);
-                        break;
-                    case "critical_strike":
+                    case "crit_rating":
                         itemStatsDto.setCriticalStrike(statValue);
                         break;
-                    case "mastery":
+                    case "mastery_rating":
                         itemStatsDto.setMastery(statValue);
                         break;
                     case "versatility":
                         itemStatsDto.setVersatility(statValue);
                         break;
-                    case "haste":
+                    case "haste_rating":
                         itemStatsDto.setHaste(statValue);
                         break;
-                    case "cooldown_reduction":
-                        itemStatsDto.setCooldownReduction(statValue);
-                        break;
-                    case "health_regeneration":
+                    case "health_regen":
                         itemStatsDto.setHealthRegeneration(statValue);
                         break;
                     case "mana_regeneration":
                         itemStatsDto.setManaRegeneration(statValue);
                         break;
-                    case "healing":
-                        itemStatsDto.setHealing(statValue);
+                    case "dodge_rating":
+                        itemStatsDto.setDodge(statValue);
                         break;
                     default:
                         // Obsłuż inne statystyki, jeśli są potrzebne
@@ -184,10 +208,9 @@ public class ItemService {
 
 
         itemStatsDto.setArmor(itemNode.path("preview_item").path("armor").path("value").asInt()); // to dziala
-        itemStatsDto.setDodge(itemNode.path("preview_item").path("dodge").path("value").asInt()); //to mam nadzieje ale trzeba sprawdzic
-        itemStatsDto.setBlock(itemNode.path("preview_item").path("block").path("value").asInt()); // to tez
+        itemStatsDto.setBlock(itemNode.path("preview_item").path("shield_block").path("value").asInt()); // to tez
 
-        //dolozyc mastery bo nie działa, mana regen, mana, health_regen, healing, haste, dodge, critical strike, cooldown, block
+        //dolozyc  bo nie działa, mana regen
 
         itemDto.setItemStats(itemStatsDto);
 
@@ -198,8 +221,8 @@ public class ItemService {
 
         // Mapuj zestawy
         ItemSetDto itemSetDto = new ItemSetDto();
-        if (itemNode.has("set")) {
-            itemSetDto.setName(itemNode.path("set").path("item_set").path("name").asText());
+        if (itemNode.path("preview_item").has("set")) {
+            itemSetDto.setName(itemNode.path("preview_item").path("set").path("item_set").path("name").path("en_US").asText());
         }
         else
         {
@@ -208,6 +231,27 @@ public class ItemService {
         itemDto.setItemSet(itemSetDto);
 
         return itemDto;
+    }
+
+    public Long getHighestIdFromBlizzard(String accessToken) {
+        var response = webClient.get()
+                .uri("https://us.api.blizzard.com/data/wow/search/item?namespace=static-us&locale=en_US&orderby=id:desc&_page=1&_pageSize=1&id=[,999999]")
+                .header("Authorization", "Bearer " + accessToken)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            JsonNode rootNode = objectMapper.readTree(response);
+            Long lastItem = rootNode.path("results").get(0).path("data").path("id").asLong();
+            return lastItem;
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while fetching highest id from Blizzard API");
+        }
+
     }
 }
 
