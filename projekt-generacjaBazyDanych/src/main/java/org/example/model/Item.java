@@ -2,6 +2,7 @@ package org.example.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 
 
 @Entity
@@ -27,6 +28,14 @@ public class Item {
 
     @OneToOne(cascade = CascadeType.ALL)
     private ItemMedia itemMedia;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "item_item_spells",
+            joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "spell_id")
+    )
+    private List<ItemSpells> itemSpells;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_set_id")
@@ -102,6 +111,14 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<ItemSpells> getItemSpells() {
+        return itemSpells;
+    }
+
+    public void setItemSpells(List<ItemSpells> itemSpells) {
+        this.itemSpells = itemSpells;
     }
 }
 

@@ -11,14 +11,16 @@ public class EntityMapper implements ICatalogMappers{
     private final IMapEntities<ItemSubclassDto, ItemSubclass> forItemSubclass;
     private final IMapEntities<ItemSetDto, ItemSet> forItemSet;
     private final IMapEntities<ItemStatsDto, ItemStats> forItemStats;
+    private final IMapEntities<ItemSpellsDto, ItemSpells> forItemSpells;
 
-    public EntityMapper(IMapEntities<ItemDto, Item> forItem, IMapEntities<ItemClassDto, ItemClass> forItemClass, IMapEntities<ItemMediaDto, ItemMedia> forItemMedia, IMapEntities<ItemSubclassDto, ItemSubclass> forItemSubclass, IMapEntities<ItemSetDto, ItemSet> forItemSet, IMapEntities<ItemStatsDto, ItemStats> forItemStats) {
+    public EntityMapper(IMapEntities<ItemDto, Item> forItem, IMapEntities<ItemClassDto, ItemClass> forItemClass, IMapEntities<ItemMediaDto, ItemMedia> forItemMedia, IMapEntities<ItemSubclassDto, ItemSubclass> forItemSubclass, IMapEntities<ItemSetDto, ItemSet> forItemSet, IMapEntities<ItemStatsDto, ItemStats> forItemStats, IMapEntities<ItemSpellsDto, ItemSpells> forItemSpells) {
         this.forItem = forItem;
         this.forItemClass = forItemClass;
         this.forItemMedia = forItemMedia;
         this.forItemSubclass = forItemSubclass;
         this.forItemSet = forItemSet;
         this.forItemStats = forItemStats;
+        this.forItemSpells = forItemSpells;
     }
 
     @Override
@@ -49,5 +51,10 @@ public class EntityMapper implements ICatalogMappers{
     @Override
     public IMapEntities<ItemStatsDto, ItemStats> forItemStats() {
         return forItemStats;
+    }
+
+    @Override
+    public IMapEntities<ItemSpellsDto, ItemSpells> forItemSpells() {
+        return forItemSpells;
     }
 }

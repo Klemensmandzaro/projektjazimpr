@@ -10,7 +10,7 @@ public class WebClientConfig {
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
         return builder.baseUrl("https://us.api.blizzard.com")
-                .defaultHeader("Authorization", "Bearer EUmWxjRyq531sT5hDp7m5A7NdvUw3ROh8k")
+                .defaultHeader("Authorization", "Bearer EU6wnpyf2IooINNX836OtVIXIMOgwQIBTx")
                 .build();
     }
 }

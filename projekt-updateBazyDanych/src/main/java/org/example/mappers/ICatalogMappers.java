@@ -15,4 +15,6 @@ public interface ICatalogMappers {
     IMapEntities<ItemSetDto, ItemSet> forItemSet();
 
     IMapEntities<ItemStatsDto, ItemStats> forItemStats();
+
+    IMapEntities<ItemSpellsDto, ItemSpells> forItemSpells();
 }

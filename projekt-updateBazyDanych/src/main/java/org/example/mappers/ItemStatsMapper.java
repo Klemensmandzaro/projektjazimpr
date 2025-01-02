@@ -23,7 +23,23 @@ public class ItemStatsMapper implements IMapEntities<ItemStatsDto, ItemStats> {
         itemStats.setBlock(itemStatsDto.getBlock());
         itemStats.setDodge(itemStatsDto.getDodge());
         itemStats.setHealthRegeneration(itemStatsDto.getHealthRegeneration());
-        itemStats.setHealthRegeneration(itemStatsDto.getHealthRegeneration());
+        itemStats.setManaRegeneration(itemStatsDto.getManaRegeneration());
+        itemStats.setOtherType(itemStatsDto.getOtherType());
+        itemStats.setArcane_resistance(itemStatsDto.getArcane_resistance());
+        itemStats.setFire_resistance(itemStatsDto.getFire_resistance());
+        itemStats.setFrost_resistance(itemStatsDto.getFrost_resistance());
+        itemStats.setNature_resistance(itemStatsDto.getNature_resistance());
+        itemStats.setShadow_resistance(itemStatsDto.getShadow_resistance());
+        itemStats.setCrit_ranged(itemStatsDto.getCrit_ranged());
+        itemStats.setParry(itemStatsDto.getParry());
+        itemStats.setSpell_power(itemStatsDto.getSpell_power());
+        itemStats.setSpirit(itemStatsDto.getSpirit());
+        itemStats.setDamage_min(itemStatsDto.getDamage_min());
+        itemStats.setDamage_max(itemStatsDto.getDamage_max());
+        itemStats.setAttack_speed(itemStatsDto.getAttack_speed());
+        itemStats.setDPS(itemStatsDto.getDPS());
+
+
         return itemStats;
 
     }

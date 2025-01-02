@@ -36,6 +36,10 @@ public class ItemStats {
     private Integer Parry;
     private Integer Spell_power;
     private Integer Spirit;
+    private Integer Damage_min;
+    private Integer Damage_max;
+    private Integer Attack_speed;
+    private Double DPS;
 
     public Long getId() {
         return id;
@@ -227,6 +231,38 @@ public class ItemStats {
 
     public void setSpirit(Integer spirit) {
         Spirit = spirit;
+    }
+
+    public Integer getDamage_min() {
+        return Damage_min;
+    }
+
+    public void setDamage_min(Integer damage_min) {
+        Damage_min = damage_min;
+    }
+
+    public Integer getDamage_max() {
+        return Damage_max;
+    }
+
+    public void setDamage_max(Integer damage_max) {
+        Damage_max = damage_max;
+    }
+
+    public Integer getAttack_speed() {
+        return Attack_speed;
+    }
+
+    public void setAttack_speed(Integer attack_speed) {
+        Attack_speed = attack_speed;
+    }
+
+    public Double getDPS() {
+        return DPS;
+    }
+
+    public void setDPS(Double DPS) {
+        this.DPS = DPS;
     }
 }
 

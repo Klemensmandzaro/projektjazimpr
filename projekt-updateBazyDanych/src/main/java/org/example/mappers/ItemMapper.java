@@ -1,25 +1,28 @@
 package org.example.mappers;
 
 import org.example.DTOs.ItemDto;
+import org.example.DTOs.ItemSpellsDto;
 import org.example.model.*;
-import org.example.repositories.ItemClassRepository;
-import org.example.repositories.ItemRepository;
-import org.example.repositories.ItemSetRepository;
-import org.example.repositories.ItemSubclassRepository;
+import org.example.repositories.*;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ItemMapper implements IMapEntities<ItemDto, Item> {
     private final ItemClassRepository itemClassRepository;
     private final ItemSubclassRepository itemSubclassRepository;
     private final ItemSetRepository itemSetRepository;
+    private final ItemSpellsRepository itemSpellsRepository;
 
 
-    public ItemMapper(ItemClassRepository itemClassRepository, ItemSubclassRepository itemSubclassRepository, ItemSetRepository itemSetRepository, ItemRepository itemRepository) {
+    public ItemMapper(ItemClassRepository itemClassRepository, ItemSubclassRepository itemSubclassRepository, ItemSetRepository itemSetRepository, ItemRepository itemRepository, ItemSpellsRepository itemSpellsRepository) {
         this.itemClassRepository = itemClassRepository;
         this.itemSubclassRepository = itemSubclassRepository;
         this.itemSetRepository = itemSetRepository;
 
+        this.itemSpellsRepository = itemSpellsRepository;
     }
 
     @Override
@@ -74,6 +77,10 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
         itemStats.setFrost_resistance(itemDto.getItemStats().getFrost_resistance());
         itemStats.setNature_resistance(itemDto.getItemStats().getNature_resistance());
         itemStats.setShadow_resistance(itemDto.getItemStats().getShadow_resistance());
+        itemStats.setDamage_min(itemDto.getItemStats().getDamage_min());
+        itemStats.setDamage_max(itemDto.getItemStats().getDamage_max());
+        itemStats.setAttack_speed(itemDto.getItemStats().getAttack_speed());
+        itemStats.setDPS(itemDto.getItemStats().getDPS());
         item.setItemStats(itemStats);
 
 
@@ -86,10 +93,25 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
         } else {
             ItemSet itemSet = new ItemSet();
             itemSet.setSetName(itemDto.getItemSet().getName());
+            itemSet.setEffects(itemDto.getItemSet().getEffects());
             item.setItemSet(itemSet);
         }
 
-
+        List<ItemSpells> itemSpellsList = new ArrayList<>();
+        if (itemDto.getItemSpells() == null) {
+            return item;
+        }
+        for (ItemSpellsDto itemSpellsDto : itemDto.getItemSpells()) {
+            if (itemSpellsRepository.findByName(itemSpellsDto.getName()).isPresent()) {
+                itemSpellsList.add(itemSpellsRepository.findByName(itemSpellsDto.getName()).get());
+            } else {
+                ItemSpells itemSpells = new ItemSpells();
+                itemSpells.setName(itemSpellsDto.getName());
+                itemSpells.setDescription(itemSpellsDto.getDescription());
+                itemSpellsList.add(itemSpells);
+            }
+        }
+        item.setItemSpells(itemSpellsList);
 
 
         return item;

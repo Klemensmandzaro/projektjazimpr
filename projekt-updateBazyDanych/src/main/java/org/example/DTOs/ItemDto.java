@@ -3,6 +3,9 @@ package org.example.DTOs;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ItemDto {
     private Long id;
@@ -19,6 +22,8 @@ public class ItemDto {
     private ItemMediaDto itemMedia;
 
     private ItemSetDto itemSet;
+
+    private List<ItemSpellsDto> itemSpells = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -90,6 +95,14 @@ public class ItemDto {
 
     public void setItemSet(ItemSetDto itemSet) {
         this.itemSet = itemSet;
+    }
+
+    public List<ItemSpellsDto> getItemSpells() {
+        return itemSpells;
+    }
+
+    public void setItemSpells(List<ItemSpellsDto> itemSpells) {
+        this.itemSpells = itemSpells;
     }
 }
 

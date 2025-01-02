@@ -12,6 +12,7 @@ public class ItemSetMapper implements IMapEntities<ItemSetDto, ItemSet> {
     @Override
     public ItemSet map(ItemSetDto itemSetDto, ItemSet itemSet) {
         itemSet.setSetName(itemSetDto.getName());
+        itemSet.setEffects(itemSetDto.getEffects());
         return itemSet;
     }
 }

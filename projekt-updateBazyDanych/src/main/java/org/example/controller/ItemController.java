@@ -22,7 +22,7 @@ public class ItemController {
 
     @GetMapping("/update")
     public ResponseEntity<String> getItem() {
-        itemService.fetchAndSaveItems("EUmWxjRyq531sT5hDp7m5A7NdvUw3ROh8k");
+        itemService.fetchAndSaveItems("EU6wnpyf2IooINNX836OtVIXIMOgwQIBTx");
         return new ResponseEntity<>("Update wpada", HttpStatus.OK);
 
 

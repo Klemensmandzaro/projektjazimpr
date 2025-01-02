@@ -3,6 +3,7 @@ package org.example.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,11 @@ public class ItemSet {
     private Long id;
 
     private String setName;
+
+    @ElementCollection
+    @CollectionTable(name = "item_set_effects", joinColumns = @JoinColumn(name = "item_set_id"))
+    @Column(name = "effect")
+    private List<String> effects = new ArrayList<>();
 
 
 
@@ -33,6 +39,12 @@ public class ItemSet {
         this.setName = setName;
     }
 
+    public List<String> getEffects() {
+        return effects;
+    }
 
+    public void setEffects(List<String> effects) {
+        this.effects = effects;
+    }
 }
 

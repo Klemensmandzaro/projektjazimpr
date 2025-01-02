@@ -223,7 +223,7 @@ public class ItemService {
                     case "parry_rating":
                         itemStatsDto.setParry(statValue);
                         break;
-                    case "crit_ranged":
+                    case "crit_ranged_rating":
                         itemStatsDto.setCrit_ranged(statValue);
                         break;
                     default:
@@ -236,6 +236,10 @@ public class ItemService {
 
         itemStatsDto.setArmor(itemNode.path("preview_item").path("armor").path("value").asInt()); // to dziala
         itemStatsDto.setBlock(itemNode.path("preview_item").path("shield_block").path("value").asInt()); // to tez
+        itemStatsDto.setDamage_min(itemNode.path("preview_item").path("weapon").path("damage").path("min_value").asInt());
+        itemStatsDto.setDamage_max(itemNode.path("preview_item").path("weapon").path("damage").path("max_value").asInt());
+        itemStatsDto.setAttack_speed(itemNode.path("preview_item").path("weapon").path("attack_speed").path("value").asInt());
+        itemStatsDto.setDPS(itemNode.path("preview_item").path("weapon").path("dps").path("value").asDouble());
 
         //dolozyc  bo nie działa, mana regen
 
@@ -250,12 +254,30 @@ public class ItemService {
         ItemSetDto itemSetDto = new ItemSetDto();
         if (itemNode.path("preview_item").has("set")) {
             itemSetDto.setName(itemNode.path("preview_item").path("set").path("item_set").path("name").path("en_US").asText());
+            JsonNode effectsNode = itemNode.path("preview_item").path("set").path("effects");
+            if (effectsNode.isArray() && !effectsNode.isEmpty()) {
+                for (JsonNode effect : effectsNode) {
+                    itemSetDto.getEffects().add(effect.path("display_string").path("en_US").asText());
+                }
+            }
         }
         else
         {
             itemSetDto.setName("Neutral");
         }
         itemDto.setItemSet(itemSetDto);
+
+
+        // Mapuj zaklęcia (zobaczymy czy en_US działa)
+        JsonNode spellsNode = itemNode.path("preview_item").path("spells");
+        if (spellsNode.isArray() && !spellsNode.isEmpty()) {
+            for (JsonNode spell : spellsNode) {
+                ItemSpellsDto itemSpellsDto = new ItemSpellsDto();
+                itemSpellsDto.setName(spell.path("spell").path("name").path("en_US").asText());
+                itemSpellsDto.setDescription(spell.path("description").path("en_US").asText());
+                itemDto.getItemSpells().add(itemSpellsDto);
+            }
+        }
 
         return itemDto;
     }
