@@ -113,8 +113,13 @@ public class ItemService {
                         .bodyToMono(String.class)
                         .block();
                 JsonNode itemMediaNode = objectMapper.readTree(itemMediaResponse);
+                String mediaLink = "";
+                if (!itemMediaNode.path("assets").isEmpty())
+                {
+                    mediaLink = itemMediaNode.path("assets").get(0).path("value").asText();
+                }
 
-                String mediaLink = itemMediaNode.path("assets").get(0).path("value").asText();
+
 
                 ItemDto itemDto = mapToDto(itemNodeReal, mediaLink);
 

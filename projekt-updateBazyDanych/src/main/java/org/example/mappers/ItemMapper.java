@@ -102,8 +102,10 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
             return item;
         }
         for (ItemSpellsDto itemSpellsDto : itemDto.getItemSpells()) {
-            if (itemSpellsRepository.findByName(itemSpellsDto.getName()).isPresent()) {
-                itemSpellsList.add(itemSpellsRepository.findByName(itemSpellsDto.getName()).get());
+            if (itemSpellsRepository.findFirstByDescription(itemSpellsDto.getDescription()).isPresent()) {
+
+                itemSpellsList.add(itemSpellsRepository.findFirstByDescription(itemSpellsDto.getDescription()).get());
+
             } else {
                 ItemSpells itemSpells = new ItemSpells();
                 itemSpells.setName(itemSpellsDto.getName());

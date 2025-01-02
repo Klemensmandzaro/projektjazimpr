@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface ItemSpellsRepository extends JpaRepository<ItemSpells, Long> {
     Optional<ItemSpells> findByName(String name);
+    List<ItemSpells> findByIdBetween(Long start, Long end);
+    Optional<ItemSpells> findFirstByDescription(String description);
 
 }

@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableJpaRepositories
 @SpringBootApplication
 @EnableAsync
-public class Main {
+public class ItemUpdater {
     public static void main(String[] args) {
         SpringApplication.run(CreateTablesForDataBase.class, args);
     }

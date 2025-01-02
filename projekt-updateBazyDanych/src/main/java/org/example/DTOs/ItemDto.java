@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public class ItemDto {
-    private Long id;
+
 
     @JsonProperty("id") private Long blizzardId;
     private String name;
@@ -25,13 +25,7 @@ public class ItemDto {
 
     private List<ItemSpellsDto> itemSpells = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getBlizzardId() {
         return blizzardId;
