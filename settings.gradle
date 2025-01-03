@@ -2,4 +2,5 @@ rootProject.name = 'projekt'
 include 'projekt-generacjaBazyDanych'
 include 'projekt-updateBazyDanych'
 include 'projekt-API'
+include 'projekt-klient'
 

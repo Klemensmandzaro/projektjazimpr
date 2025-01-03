@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'org.example'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.27.0'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.4.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '3.0.3'
+    implementation project(':projekt-generacjaBazyDanych')
+    implementation project(':projekt-updateBazyDanych')
+    implementation project(':projekt-API')
+}
+
+test {
+    useJUnitPlatform()
+}

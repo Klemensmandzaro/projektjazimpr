@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .stat-table, .spell-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .stat-table td, .spell-table td {
+            border: none;
+            padding: 4px;
+        }
+        .icon-column {
+            width: 50px;
+        }
+        .icon-column img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td class="icon-column">Icon</td>
+        <td>Class</td>
+        <td>Subclass</td>
+        <td>Set</td>
+        <td>Set Bonus</td>
+        <td>Stats</td>
+        <td>Spells</td>
+    </tr>
+    <tr th:each="item, iter : ${itemList}">
+        <td th:id="'row-' + ${iter.index+1}+ '-id'" th:text="${item.id}"></td>
+        <td th:id="'row-' + ${iter.index+1}+ '-name'" th:text="${item.name}"></td>
+        <td class="icon-column">
+            <img th:src="${item.itemMedia.iconUrl}" alt="Item Icon">
+        </td>
+        <td th:id="'row-' + ${iter.index+1}+ '-class'" th:text="${item.itemClass.className}"></td>
+        <td th:id="'row-' + ${iter.index+1}+ '-subclass'" th:text="${item.itemSubclass.subclassName}"></td>
+        <td th:id="'row-' + ${iter.index+1}+ '-set'" th:text="${item.itemSet.setName}"></td>
+        <td>
+            <table>
+                <tr th:each="bonus : ${item.itemSet.effects}">
+                    <td th:text="${bonus}"></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr th:if="${item.itemStats.Strength != null and item.itemStats.Strength != 0}">
+                    <td>Strength</td>
+                    <td th:text="${item.itemStats.Strength}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Agility != null and item.itemStats.Agility != 0}">
+                    <td>Agility</td>
+                    <td th:text="${item.itemStats.Agility}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Intellect != null and item.itemStats.Intellect != 0}">
+                    <td>Intellect</td>
+                    <td th:text="${item.itemStats.Intellect}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Stamina != null and item.itemStats.Stamina != 0}">
+                    <td>Stamina</td>
+                    <td th:text="${item.itemStats.Stamina}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.CriticalStrike != null and item.itemStats.CriticalStrike != 0}">
+                    <td>Critical Strike</td>
+                    <td th:text="${item.itemStats.CriticalStrike}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Mastery != null and item.itemStats.Mastery != 0}">
+                    <td>Mastery</td>
+                    <td th:text="${item.itemStats.Mastery}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Versatility != null and item.itemStats.Versatility != 0}">
+                    <td>Versatility</td>
+                    <td th:text="${item.itemStats.Versatility}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Haste != null and item.itemStats.Haste != 0}">
+                    <td>Haste</td>
+                    <td th:text="${item.itemStats.Haste}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Armor != null and item.itemStats.Armor != 0}">
+                    <td>Armor</td>
+                    <td th:text="${item.itemStats.Armor}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Block != null and item.itemStats.Block != 0}">
+                    <td>Block</td>
+                    <td th:text="${item.itemStats.Block}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Dodge != null and item.itemStats.Dodge != 0}">
+                    <td>Dodge</td>
+                    <td th:text="${item.itemStats.Dodge}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.HealthRegeneration != null and item.itemStats.HealthRegeneration != 0}">
+                    <td>Health Regeneration</td>
+                    <td th:text="${item.itemStats.HealthRegeneration}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.ManaRegeneration != null and item.itemStats.ManaRegeneration != 0}">
+                    <td>Mana Regeneration</td>
+                    <td th:text="${item.itemStats.ManaRegeneration}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.OtherType != null and !item.itemStats.OtherType.isEmpty()}">
+                    <td>Other Type</td>
+                    <td th:text="${item.itemStats.OtherType}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Arcane_resistance != null and item.itemStats.Arcane_resistance != 0}">
+                    <td>Arcane Resistance</td>
+                    <td th:text="${item.itemStats.Arcane_resistance}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Fire_resistance != null and item.itemStats.Fire_resistance != 0}">
+                    <td>Fire Resistance</td>
+                    <td th:text="${item.itemStats.Fire_resistance}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Frost_resistance != null and item.itemStats.Frost_resistance != 0}">
+                    <td>Frost Resistance</td>
+                    <td th:text="${item.itemStats.Frost_resistance}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Nature_resistance != null and item.itemStats.Nature_resistance != 0}">
+                    <td>Nature Resistance</td>
+                    <td th:text="${item.itemStats.Nature_resistance}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Shadow_resistance != null and item.itemStats.Shadow_resistance != 0}">
+                    <td>Shadow Resistance</td>
+                    <td th:text="${item.itemStats.Shadow_resistance}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Crit_ranged != null and item.itemStats.Crit_ranged != 0}">
+                    <td>Crit Ranged</td>
+                    <td th:text="${item.itemStats.Crit_ranged}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Parry != null and item.itemStats.Parry != 0}">
+                    <td>Parry</td>
+                    <td th:text="${item.itemStats.Parry}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Spell_power != null and item.itemStats.Spell_power != 0}">
+                    <td>Spell Power</td>
+                    <td th:text="${item.itemStats.Spell_power}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Spirit != null and item.itemStats.Spirit != 0}">
+                    <td>Spirit</td>
+                    <td th:text="${item.itemStats.Spirit}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Damage_min != null and item.itemStats.Damage_min != 0}">
+                    <td>Damage Min</td>
+                    <td th:text="${item.itemStats.Damage_min}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Damage_max != null and item.itemStats.Damage_max != 0}">
+                    <td>Damage Max</td>
+                    <td th:text="${item.itemStats.Damage_max}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.Attack_speed != null and item.itemStats.Attack_speed != 0}">
+                    <td>Attack Speed</td>
+                    <td th:text="${item.itemStats.Attack_speed}"></td>
+                </tr>
+                <tr th:if="${item.itemStats.DPS != null and item.itemStats.DPS != 0}">
+                    <td>DPS</td>
+                    <td th:text="${item.itemStats.DPS}"></td>
+                </tr>
+            </table>
+        </td>
+
+        <td>
+            <table>
+                <tr th:each="spell : ${item.itemSpells}">
+                    <td th:text="${spell.name}"></td>
+                    <td th:text="${spell.description}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package org.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
@@ -39,6 +40,7 @@ public class ItemSpells {
     }
 
     @ManyToMany(mappedBy = "itemSpells")
+    @JsonIgnore
     private List<Item> items;
 
     public List<Item> getItems() {
