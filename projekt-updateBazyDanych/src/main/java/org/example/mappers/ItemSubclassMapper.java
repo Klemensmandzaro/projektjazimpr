@@ -12,6 +12,8 @@ public class ItemSubclassMapper implements IMapEntities<ItemSubclassDto, ItemSub
     @Override
     public ItemSubclass map(ItemSubclassDto itemSubclassDto, ItemSubclass itemSubclass) {
         itemSubclass.setSubclassName(itemSubclassDto.getName());
+        ItemClassMapper itemClassMapper = new ItemClassMapper();
+        itemSubclass.setItemClass(itemClassMapper.map(itemSubclassDto.getItemClassDto()));
         return itemSubclass;
     }
 }

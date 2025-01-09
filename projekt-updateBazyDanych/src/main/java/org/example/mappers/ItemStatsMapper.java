@@ -23,7 +23,6 @@ public class ItemStatsMapper implements IMapEntities<ItemStatsDto, ItemStats> {
         itemStats.setBlock(itemStatsDto.getBlock());
         itemStats.setDodge(itemStatsDto.getDodge());
         itemStats.setHealthRegeneration(itemStatsDto.getHealthRegeneration());
-        itemStats.setManaRegeneration(itemStatsDto.getManaRegeneration());
         itemStats.setOtherType(itemStatsDto.getOtherType());
         itemStats.setArcane_resistance(itemStatsDto.getArcane_resistance());
         itemStats.setFire_resistance(itemStatsDto.getFire_resistance());
@@ -38,6 +37,22 @@ public class ItemStatsMapper implements IMapEntities<ItemStatsDto, ItemStats> {
         itemStats.setDamage_max(itemStatsDto.getDamage_max());
         itemStats.setAttack_speed(itemStatsDto.getAttack_speed());
         itemStats.setDPS(itemStatsDto.getDPS());
+        itemStats.setAttack_power(itemStatsDto.getAttack_power());
+        itemStats.setRanged_attack_power(itemStatsDto.getRanged_attack_power());
+        itemStats.setCrafting_speed(itemStatsDto.getCrafting_speed());
+        itemStats.setDeftness(itemStatsDto.getDeftness());
+        itemStats.setFinesse(itemStatsDto.getFinesse());
+        itemStats.setIngenuity(itemStatsDto.getIngenuity());
+        itemStats.setMulticraft(itemStatsDto.getMulticraft());
+        itemStats.setPerception(itemStatsDto.getPerception());
+        itemStats.setResourcefulness(itemStatsDto.getResourcefulness());
+        itemStats.setAvoidance(itemStatsDto.getAvoidance());
+        itemStats.setLifesteal(itemStatsDto.getLifesteal());
+        itemStats.setSpeed(itemStatsDto.getSpeed());
+        itemStats.setSturdiness(itemStatsDto.getSturdiness());
+        itemStats.setCorruption_resistance(itemStatsDto.getCorruption_resistance());
+        itemStats.setExtra_armor(itemStatsDto.getExtra_armor());
+        itemStats.setMana(itemStatsDto.getMana());
 
 
         return itemStats;

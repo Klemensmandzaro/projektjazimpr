@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Effects</td>
+    </tr>
+    <tr th:each="itemSet, iter : ${itemSetList}">
+        <td th:id="'row-' + ${iter.index+1} + '-name'" th:text="${itemSet.setName}"></td>
+        <td>
+            <table>
+                <tr th:each="itemBonus, iter2 : ${itemSet.effects}">
+                    <td th:id="'row-' + ${iter2.index+1} + '-effect'" th:text="${itemBonus}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

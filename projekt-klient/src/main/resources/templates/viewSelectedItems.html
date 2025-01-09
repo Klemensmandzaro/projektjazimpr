@@ -43,6 +43,23 @@
             height: 50px;
         }
     </style>
+    <script>
+        function deleteItem(itemId) {
+            if (confirm("Are you sure you want to delete this item?")) {
+                fetch(`/item/delete?id=${itemId}`, {
+                    method: 'POST'
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert("Item deleted successfully.");
+                            location.reload();
+                        } else {
+                            alert("Failed to delete item.");
+                        }
+                    });
+            }
+        }
+    </script>
 </head>
 <body>
 <table>
@@ -60,8 +77,8 @@
     <tr th:each="item, iter : ${itemList}">
         <td th:id="'row-' + ${iter.index+1}+ '-id'" th:text="${item.id}"></td>
         <td th:id="'row-' + ${iter.index+1}+ '-name'" th:text="${item.name}"></td>
-        <td class="icon-column">
-            <img th:src="${item.itemMedia.iconUrl}" alt="Item Icon">
+        <td class="icon-column" >
+            <img th:src="${item.itemMedia.iconUrl}" alt="Item Icon" th:if="${item.itemMedia != null and item.itemMedia.iconUrl != null}">
         </td>
         <td th:id="'row-' + ${iter.index+1}+ '-class'" th:text="${item.itemClass.className}"></td>
         <td th:id="'row-' + ${iter.index+1}+ '-subclass'" th:text="${item.itemSubclass.subclassName}"></td>
@@ -122,10 +139,6 @@
                 <tr th:if="${item.itemStats.HealthRegeneration != null and item.itemStats.HealthRegeneration != 0}">
                     <td>Health Regeneration</td>
                     <td th:text="${item.itemStats.HealthRegeneration}"></td>
-                </tr>
-                <tr th:if="${item.itemStats.ManaRegeneration != null and item.itemStats.ManaRegeneration != 0}">
-                    <td>Mana Regeneration</td>
-                    <td th:text="${item.itemStats.ManaRegeneration}"></td>
                 </tr>
                 <tr th:if="${item.itemStats.OtherType != null and !item.itemStats.OtherType.isEmpty()}">
                     <td>Other Type</td>
@@ -193,6 +206,9 @@
                     <td th:text="${spell.description}"></td>
                 </tr>
             </table>
+        </td>
+        <td>
+            <button th:onclick="deleteItem([[${item.id}]])">Delete</button>
         </td>
     </tr>
 </table>

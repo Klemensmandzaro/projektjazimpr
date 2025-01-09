@@ -6,6 +6,7 @@ alter table item drop foreign key FK59l645fqxtw26ctcmdclg1rke;
 alter table item_item_spells drop foreign key FKe6fyikrn30ty5vyll3evc54ys;
 alter table item_item_spells drop foreign key FKprg6l7w00u2aohqxw4bekpfx9;
 alter table item_set_effects drop foreign key FK9mjms4os2bw5v2junptrxkket;
+alter table item_subclass drop foreign key FK48urud114l0wb1uqdsec3e4u3;
 drop table if exists item;
 drop table if exists item_item_spells;
 drop table if exists item_set_effects;

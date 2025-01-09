@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     Optional<Item> findByBlizzardId(Long id);
-    Optional<Item> findTopByOrderByIdDesc();
+    Optional<Item> findTopByOrderByBlizzardIdDesc();
     List<Item> findAll();
     List<Item> findFirst10ByOrderByIdAsc();
     List<Item> findByIdBetween(Long start, Long end);
@@ -27,4 +27,5 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     List<Item> findByItemSpellsName(String itemSpellName);
 
 
+    List<Item> findByisCreatedByUser(boolean isCreatedByUser);
 }

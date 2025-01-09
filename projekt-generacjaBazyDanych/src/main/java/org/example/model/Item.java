@@ -1,8 +1,10 @@
 package org.example.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -15,6 +17,7 @@ public class Item {
 
     private Long blizzardId;
     private String name;
+    @Column(length = 1000)
     private String description;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -40,6 +43,29 @@ public class Item {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_set_id")
     private ItemSet itemSet;
+
+    private boolean isCreatedByUser;
+
+    public boolean isCreatedByUser() {
+        return isCreatedByUser;
+    }
+
+    public void setCreatedByUser(boolean createdByUser) {
+        isCreatedByUser = createdByUser;
+    }
+
+    public String getSpellIds() {
+        String string = "";
+        for (ItemSpells itemSpells : this.getItemSpells()) {
+            if (string=="") {
+                string+=itemSpells.getId().toString();
+            }
+            else
+            string+=","+itemSpells.getId().toString();
+        }
+
+        return string;
+    }
 
     public Long getId() {
         return id;

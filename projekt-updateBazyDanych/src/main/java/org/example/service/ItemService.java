@@ -42,9 +42,9 @@ public class ItemService {
         Long lastItem = getHighestIdFromBlizzard(accessToken);
 
         Long itemId = 25L;
-        if (itemRepository.findTopByOrderByIdDesc().isPresent())
+        if (itemRepository.findTopByOrderByBlizzardIdDesc().isPresent())
         {
-            itemId=itemRepository.findTopByOrderByIdDesc().get().getBlizzardId();
+            itemId=itemRepository.findTopByOrderByBlizzardIdDesc().get().getBlizzardId();
         }
 
         while (itemId < lastItem) {
@@ -75,9 +75,9 @@ public class ItemService {
                 hasMorePages = processResponse(response, accessToken);
                 page++;
             }
-            if (itemRepository.findTopByOrderByIdDesc().isPresent())
+            if (itemRepository.findTopByOrderByBlizzardIdDesc().isPresent())
             {
-                itemId=itemRepository.findTopByOrderByIdDesc().get().getBlizzardId();
+                itemId=itemRepository.findTopByOrderByBlizzardIdDesc().get().getBlizzardId();
             }
             else
             {
@@ -149,6 +149,7 @@ public class ItemService {
 
     private ItemDto mapToDto(JsonNode itemNode, String mediaLink) {
         ItemDto itemDto = new ItemDto();
+        itemDto.setCreatedByUser(false);
         itemDto.setBlizzardId(itemNode.path("id").asLong());
         itemDto.setName(itemNode.path("name").path("en_US").asText());
         itemDto.setDescription(itemNode.path("preview_item").path("description").asText());
@@ -159,6 +160,7 @@ public class ItemService {
         itemDto.setItemClass(itemClassDto);
 
         ItemSubclassDto itemSubclassDto = new ItemSubclassDto();
+        itemSubclassDto.setItemClassDto(itemClassDto);
         itemSubclassDto.setName(itemNode.path("item_subclass").path("name").path("en_US").asText());
         itemDto.setItemSubclass(itemSubclassDto);
 
@@ -230,6 +232,54 @@ public class ItemService {
                         break;
                     case "crit_ranged_rating":
                         itemStatsDto.setCrit_ranged(statValue);
+                        break;
+                    case "attack_power":
+                        itemStatsDto.setAttack_power(statValue);
+                        break;
+                    case "ranged_attack_power":
+                        itemStatsDto.setRanged_attack_power(statValue);
+                        break;
+                    case "bonus_stat_profession_crafting_speed":
+                        itemStatsDto.setCrafting_speed(statValue);
+                        break;
+                    case "bonus_stat_profession_deftness":
+                        itemStatsDto.setDeftness(statValue);
+                        break;
+                    case "bonus_stat_profession_finesse":
+                        itemStatsDto.setFinesse(statValue);
+                        break;
+                    case "bonus_stat_profession_ingenuity":
+                        itemStatsDto.setIngenuity(statValue);
+                        break;
+                    case "bonus_stat_profession_multicraft":
+                        itemStatsDto.setMulticraft(statValue);
+                        break;
+                    case "bonus_stat_profession_perception":
+                        itemStatsDto.setPerception(statValue);
+                        break;
+                    case "bonus_stat_profession_resourcefulness":
+                        itemStatsDto.setResourcefulness(statValue);
+                        break;
+                    case "combat_rating_avoidance":
+                        itemStatsDto.setAvoidance(statValue);
+                        break;
+                    case "combat_rating_lifesteal":
+                        itemStatsDto.setLifesteal(statValue);
+                        break;
+                    case "combat_rating_speed":
+                        itemStatsDto.setSpeed(statValue);
+                        break;
+                    case "combat_rating_sturdiness":
+                        itemStatsDto.setSturdiness(statValue);
+                        break;
+                    case "corruption_resistance":
+                        itemStatsDto.setCorruption_resistance(statValue);
+                        break;
+                    case "extra_armor":
+                        itemStatsDto.setExtra_armor(statValue);
+                        break;
+                    case "mana":
+                        itemStatsDto.setMana(statValue);
                         break;
                     default:
                         itemStatsDto.setOtherType(statType);

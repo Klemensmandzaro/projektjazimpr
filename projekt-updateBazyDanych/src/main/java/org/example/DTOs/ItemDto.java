@@ -25,7 +25,15 @@ public class ItemDto {
 
     private List<ItemSpellsDto> itemSpells = new ArrayList<>();
 
+    private boolean isCreatedByUser;
 
+    public boolean isCreatedByUser() {
+        return isCreatedByUser;
+    }
+
+    public void setCreatedByUser(boolean createdByUser) {
+        isCreatedByUser = createdByUser;
+    }
 
     public Long getBlizzardId() {
         return blizzardId;

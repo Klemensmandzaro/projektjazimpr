@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Edit</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const itemSearch = document.getElementById('item-search');
+            const classSelect = document.getElementById("addClass");
+            const subclassSelect = document.getElementById("addSubclass");
+            const allSubclasses = Array.from(subclassSelect.options);
+            const itemList = document.getElementById('itemList');
+            const setSelect = document.getElementById('addSet');
+            const statFields = {
+                strength: document.getElementById('addStrength'),
+                agility: document.getElementById('addAgility'),
+                intellect: document.getElementById('addIntellect'),
+                stamina: document.getElementById('addStamina'),
+                criticalStrike: document.getElementById('addCriticalStrike'),
+                mastery: document.getElementById('addMastery'),
+                versatility: document.getElementById('addVersatility'),
+                haste: document.getElementById('addHaste'),
+                armor: document.getElementById('addArmor'),
+                block: document.getElementById('addBlock'),
+                dodge: document.getElementById('addDodge'),
+                healthRegeneration: document.getElementById('addHealthRegeneration'),
+                arcaneResistance: document.getElementById('addArcaneResistance'),
+                fireResistance: document.getElementById('addFireResistance'),
+                frostResistance: document.getElementById('addFrostResistance'),
+                natureResistance: document.getElementById('addNatureResistance'),
+                shadowResistance: document.getElementById('addShadowResistance'),
+                critRanged: document.getElementById('addCritRanged'),
+                parry: document.getElementById('addParry'),
+                spellPower: document.getElementById('addSpellPower'),
+                spirit: document.getElementById('addSpirit'),
+                damageMin: document.getElementById('addDamageMin'),
+                damageMax: document.getElementById('addDamageMax'),
+                attackSpeed: document.getElementById('addAttackSpeed'),
+                DPS: document.getElementById('addDPS'),
+                attackPower: document.getElementById('addAttackPower'),
+                rangedAttackPower: document.getElementById('addRangedAttackPower'),
+                craftingSpeed: document.getElementById('addCraftingSpeed'),
+                deftness: document.getElementById('addDeftness'),
+                finesse: document.getElementById('addFinesse'),
+                ingenuity: document.getElementById('addIngenuity'),
+                multicraft: document.getElementById('addMulticraft'),
+                perception: document.getElementById('addPerception'),
+                resourcefulness: document.getElementById('addResourcefulness'),
+                avoidance: document.getElementById('addAvoidance'),
+                lifesteal: document.getElementById('addLifesteal'),
+                speed: document.getElementById('addSpeed'),
+                sturdiness: document.getElementById('addSturdiness'),
+                corruptionResistance: document.getElementById('addCorruptionResistance'),
+                extraArmor: document.getElementById('addExtraArmor'),
+                mana: document.getElementById('addMana'),
+            };
+            const spellSearch = document.getElementById("spell-search");
+            const spellList = document.getElementById("spellList");
+            const addSpellButton = document.getElementById("add-spell");
+            const spellDetails = document.getElementById("spell-details");
+            const selectedSpellsInput = document.getElementById("selected-spells-input");
+
+
+            // Filter `itemList` based on input
+            itemSearch.addEventListener('input', function () {
+                const searchValue = itemSearch.value.toLowerCase();
+                const options = itemList.querySelectorAll('option');
+                options.forEach(option => {
+                    option.hidden = !option.textContent.toLowerCase().includes(searchValue);
+                });
+
+            });
+
+            // Update `classSearch` and `subclassSearch` on item selection
+            itemSearch.addEventListener('change', function () {
+                const selectedItem = itemList.querySelector(`option[value="${itemSearch.value}"]`);
+                if (selectedItem) {
+                    const classOfItem = selectedItem.getAttribute('data-class');
+                    const subclassOfItem = selectedItem.getAttribute('data-subclass');
+                    const setOfItem = selectedItem.getAttribute('data-set');
+                    document.getElementById('id').value=selectedItem.getAttribute('data-itemid');
+
+
+
+                    classSelect.value = [...classSelect.options].find(opt => opt.text === classOfItem)?.value;
+                    classSelect.dispatchEvent(new Event('change'));
+                    subclassSelect.value = [...subclassSelect.options].find(opt => opt.text === subclassOfItem)?.value;
+
+                    setSelect.value = [...setSelect.options].find(opt => opt.text === setOfItem)?.value;
+                    for (const stat in statFields) {
+                        statFields[stat].value = selectedItem.getAttribute(`data-stats-${stat}`) || 0;
+                    }
+
+                    spellDetails.innerHTML = ""; // Clear current list
+
+                    const spells = selectedItem.getAttribute('data-spells') || "";
+                    const spellIds = spells.split(",").map(spellId => spellId.trim());
+
+                    spellIds.forEach(spellId => {
+                        const spellOption = Array.from(spellList.options).find(option => option.getAttribute("data-id") === spellId);
+                        if (spellOption) {
+                            const spellName = spellOption.value;
+                            const spellDescription = spellOption.getAttribute("data-description");
+
+                            const listItem = document.createElement("li");
+                            listItem.setAttribute("data-id", spellId);
+                            listItem.innerHTML = `<strong>${spellName}</strong>: ${spellDescription}`;
+                            const removeButton = document.createElement('button');
+                            removeButton.textContent = 'Remove';
+                            removeButton.classList.add('remove-spell');
+                            listItem.appendChild(removeButton);
+                            spellDetails.appendChild(listItem);
+                        }
+                    });
+
+                    // Update the hidden input with existing spell IDs
+                    selectedSpellsInput.value = spellIds.join(",");
+                }
+
+            });
+
+            classSelect.addEventListener("change", function() {
+                const selectedClassId = this.value;
+                subclassSelect.innerHTML = '<option value="">Select Subclass</option>';
+                allSubclasses.forEach(option => {
+                    if (option.dataset.classId === selectedClassId) {
+                        subclassSelect.appendChild(option);
+                    }
+                });
+            });
+
+            const editButton = document.getElementById('editSubmit');
+            const selectedNameInput = document.getElementById('selected-name-input');
+
+            editButton.addEventListener('click', function (event) {
+                if (!itemSearch.value.trim()) {
+                    alert("Please select or type an item name.");
+                    event.preventDefault(); // Prevent form submission
+                    return;
+                }
+
+                // Update hidden field for selected item name
+                selectedNameInput.value = itemSearch.value.trim();
+            });
+
+            addSpellButton.addEventListener("click", function () {
+                const selectedSpellName = spellSearch.value.trim();
+                if (!selectedSpellName) {
+                    alert("Please select a spell.");
+                    return;
+                }
+
+                const selectedOption = Array.from(spellList.options).find(
+                    (option) => option.value === selectedSpellName
+                );
+
+                if (!selectedOption) {
+                    alert("Spell not found in the list.");
+                    return;
+                }
+
+                const spellDescription = selectedOption.getAttribute("data-description");
+                const spellId = selectedOption.getAttribute("data-id");
+
+                // Check if the spell is already added
+                const existingSpell = Array.from(document.querySelectorAll("#spell-details li")).find(
+                    (item) => item.getAttribute("data-id") === spellId
+                );
+
+                if (existingSpell) {
+                    alert("This spell is already added.");
+                    return;
+                }
+
+                // Add the spell to the list
+                const listItem = document.createElement("li");
+                listItem.setAttribute("data-id", spellId);
+                listItem.innerHTML = `<strong>${selectedSpellName}</strong>: ${spellDescription}`;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.classList.add('remove-spell');
+                listItem.appendChild(removeButton);
+                spellDetails.appendChild(listItem);
+
+                // Update the hidden input value
+                const selectedSpellsInput = document.getElementById("selected-spells-input");
+                const currentValues = selectedSpellsInput.value ? selectedSpellsInput.value.split(",") : [];
+                currentValues.push(spellId);
+                selectedSpellsInput.value = currentValues.join(",");
+
+                // Clear the input field
+                spellSearch.value = "";
+            });
+
+            spellDetails.addEventListener('click', function (event) {
+                if (event.target.classList.contains('remove-spell')) {
+                    const li = event.target.parentElement;
+                    const spellId = li.getAttribute("data-id");
+                    li.remove();
+                    const selectedSpellsInput = document.getElementById("selected-spells-input");
+                    const currentValues = selectedSpellsInput.value ? selectedSpellsInput.value.split(",") : [];
+                    const updatedValues = currentValues.filter(id => id !== spellId);
+                    selectedSpellsInput.value = updatedValues.join(",");
+                }
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+<form action="#" th:action="@{/item/edit}" th:object="${item}" method="post">
+    <table>
+        <tr>
+            <td><label for="item-search">Item</label></td>
+            <td>
+                <input type="hidden" name="id" th:field="*{id}" />
+                <input type="hidden" name="selectedName" id="selected-name-input" value="" />
+                <input type="text" id="item-search" list="itemList" placeholder="Type an item name..." autocomplete="off"/>
+                <datalist id="itemList">
+                    <option th:each="item : ${itemList}"
+                            th:text="${item.name}"
+                            th:value="${item.name}"
+                            th:data-itemid="${item.id}"
+                            th:data-class="${item.itemClass.className}"
+                            th:data-subclass="${item.itemSubclass.subclassName}"
+                            th:data-set="${item.itemSet.setName}"
+                            th:data-stats="${item.itemStats}"
+                            th:data-spells="${item.getSpellIds()}"
+                            th:data-stats-strength="${item.itemStats.strength}"
+                            th:data-stats-agility="${item.itemStats.agility}"
+                            th:data-stats-intellect="${item.itemStats.intellect}"
+                            th:data-stats-stamina="${item.itemStats.stamina}"
+                            th:data-stats-criticalStrike="${item.itemStats.criticalStrike}"
+                            th:data-stats-mastery="${item.itemStats.mastery}"
+                            th:data-stats-versatility="${item.itemStats.versatility}"
+                            th:data-stats-haste="${item.itemStats.haste}"
+                            th:data-stats-armor="${item.itemStats.armor}"
+                            th:data-stats-block="${item.itemStats.block}"
+                            th:data-stats-dodge="${item.itemStats.dodge}"
+                            th:data-stats-healthRegeneration="${item.itemStats.healthRegeneration}"
+                            th:data-stats-arcaneResistance="${item.itemStats.arcane_resistance}"
+                            th:data-stats-fireResistance="${item.itemStats.fire_resistance}"
+                            th:data-stats-frostResistance="${item.itemStats.frost_resistance}"
+                            th:data-stats-natureResistance="${item.itemStats.nature_resistance}"
+                            th:data-stats-shadowResistance="${item.itemStats.shadow_resistance}"
+                            th:data-stats-critRanged="${item.itemStats.crit_ranged}"
+                            th:data-stats-parry="${item.itemStats.parry}"
+                            th:data-stats-spellPower="${item.itemStats.spell_power}"
+                            th:data-stats-spirit="${item.itemStats.spirit}"
+                            th:data-stats-damageMin="${item.itemStats.damage_min}"
+                            th:data-stats-damageMax="${item.itemStats.damage_max}"
+                            th:data-stats-attackSpeed="${item.itemStats.attack_speed}"
+                            th:data-stats-DPS="${item.itemStats.DPS}"
+                            th:data-stats-attackPower="${item.itemStats.attack_power}"
+                            th:data-stats-rangedAttackPower="${item.itemStats.ranged_attack_power}"
+                            th:data-stats-craftingSpeed="${item.itemStats.crafting_speed}"
+                            th:data-stats-deftness="${item.itemStats.deftness}"
+                            th:data-stats-finesse="${item.itemStats.finesse}"
+                            th:data-stats-ingenuity="${item.itemStats.ingenuity}"
+                            th:data-stats-multicraft="${item.itemStats.multicraft}"
+                            th:data-stats-perception="${item.itemStats.perception}"
+                            th:data-stats-resourcefulness="${item.itemStats.resourcefulness}"
+                            th:data-stats-avoidance="${item.itemStats.avoidance}"
+                            th:data-stats-lifesteal="${item.itemStats.lifesteal}"
+                            th:data-stats-speed="${item.itemStats.speed}"
+                            th:data-stats-sturdiness="${item.itemStats.sturdiness}"
+                            th:data-stats-corruptionResistance="${item.itemStats.corruption_resistance}"
+                            th:data-stats-extraArmor="${item.itemStats.extra_armor}"
+                            th:data-stats-mana="${item.itemStats.mana}">
+                    </option>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <td><label th:text="'Class'">Class</label></td>
+            <td>
+                <select th:field="*{itemClass}" th:id="addClass">
+                    <option value="">Select Class</option>
+                    <option th:each="class : ${itemClassList}" th:value="${class.id}" th:text="${class.className}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label th:text="'Subclass'">Subclass</label></td>
+            <td>
+                <select th:field="*{itemSubclass}" th:id="addSubclass">
+                    <option value="">Select Subclass</option>
+                    <option th:each="subclass : ${itemSubclassList}" th:value="${subclass.id}" th:text="${subclass.subclassName}" th:data-class-id="${subclass.itemClass.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label th:text="'Set'">Set</label></td>
+            <td>
+                <select th:field="*{itemSet}" th:id="addSet">
+                    <option value="">Select Set</option>
+                    <option th:each="set : ${itemSetList}" th:value="${set.id}" th:text="${set.setName}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label th:text="'Strength'"></label></td>
+            <td><input type="number"  th:id="addStrength" value="0" th:field="*{itemStats.strength}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Agility'"></label></td>
+            <td><input type="number"  th:id="addAgility" value="0" th:field="*{itemStats.agility}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Intellect'"></label></td>
+            <td><input type="number"  th:id="addIntellect" value="0" th:field="*{itemStats.intellect}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Stamina'"></label></td>
+            <td><input type="number"  th:id="addStamina" value="0" th:field="*{itemStats.stamina}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Critical Strike'"></label></td>
+            <td><input type="number"  th:id="addCriticalStrike" value="0" th:field="*{itemStats.criticalStrike}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Mastery'"></label></td>
+            <td><input type="number"  th:id="addMastery" value="0" th:field="*{itemStats.mastery}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Versatility'"></label></td>
+            <td><input type="number"  th:id="addVersatility" value="0" th:field="*{itemStats.versatility}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Haste'"></label></td>
+            <td><input type="number"  th:id="addHaste" value="0" th:field="*{itemStats.haste}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Armor'"></label></td>
+            <td><input type="number"  th:id="addArmor" value="0" th:field="*{itemStats.armor}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Block'"></label></td>
+            <td><input type="number"  th:id="addBlock" value="0" th:field="*{itemStats.block}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Dodge'"></label></td>
+            <td><input type="number"  th:id="addDodge" value="0" th:field="*{itemStats.dodge}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Health Regeneration'"></label></td>
+            <td><input type="number"  th:id="addHealthRegeneration" value="0" th:field="*{itemStats.healthRegeneration}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Arcane Resistance'"></label></td>
+            <td><input type="number"  th:id="addArcaneResistance" value="0" th:field="*{itemStats.arcane_resistance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Fire Resistance'"></label></td>
+            <td><input type="number"  th:id="addFireResistance" value="0" th:field="*{itemStats.fire_resistance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Frost Resistance'"></label></td>
+            <td><input type="number"  th:id="addFrostResistance" value="0" th:field="*{itemStats.frost_resistance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Nature Resistance'"></label></td>
+            <td><input type="number"  th:id="addNatureResistance" value="0" th:field="*{itemStats.nature_resistance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Shadow Resistance'"></label></td>
+            <td><input type="number"  th:id="addShadowResistance" value="0" th:field="*{itemStats.shadow_resistance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Crit Ranged'"></label></td>
+            <td><input type="number"  th:id="addCritRanged" value="0" th:field="*{itemStats.crit_ranged}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Parry'"></label></td>
+            <td><input type="number"  th:id="addParry" value="0" th:field="*{itemStats.parry}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Spell Power'"></label></td>
+            <td><input type="number"  th:id="addSpellPower" value="0" th:field="*{itemStats.spell_power}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Spirit'"></label></td>
+            <td><input type="number"  th:id="addSpirit" value="0" th:field="*{itemStats.spirit}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Damage Min'"></label></td>
+            <td><input type="number"  th:id="addDamageMin" value="0" th:field="*{itemStats.damage_min}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Damage Max'"></label></td>
+            <td><input type="number"  th:id="addDamageMax" value="0" th:field="*{itemStats.damage_max}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Attack Speed'"></label></td>
+            <td><input type="number"  th:id="addAttackSpeed" value="0" th:field="*{itemStats.attack_speed}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'DPS'"></label></td>
+            <td><input type="number" step="0.01"  th:id="addDPS" value="0" th:field="*{itemStats.DPS}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Attack Power'"></label></td>
+            <td><input type="number"  th:id="addAttackPower" value="0" th:field="*{itemStats.attack_power}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Ranged Attack Power'"></label></td>
+            <td><input type="number"  th:id="addRangedAttackPower" value="0" th:field="*{itemStats.ranged_attack_power}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Crafting Speed'"></label></td>
+            <td><input type="number"  th:id="addCraftingSpeed" value="0" th:field="*{itemStats.crafting_speed}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Deftness'"></label></td>
+            <td><input type="number"  th:id="addDeftness" value="0" th:field="*{itemStats.deftness}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Finesse'"></label></td>
+            <td><input type="number"  th:id="addFinesse" value="0" th:field="*{itemStats.finesse}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Ingenuity'"></label></td>
+            <td><input type="number"  th:id="addIngenuity" value="0" th:field="*{itemStats.ingenuity}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Multicraft'"></label></td>
+            <td><input type="number"  th:id="addMulticraft" value="0" th:field="*{itemStats.multicraft}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Perception'"></label></td>
+            <td><input type="number" th:id="addPerception" value="0" th:field="*{itemStats.perception}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Resourcefulness'"></label></td>
+            <td><input type="number"  th:id="addResourcefulness" value="0" th:field="*{itemStats.resourcefulness}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Avoidance'"></label></td>
+            <td><input type="number"  th:id="addAvoidance" value="0" th:field="*{itemStats.avoidance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Lifesteal'"></label></td>
+            <td><input type="number"  th:id="addLifesteal" value="0" th:field="*{itemStats.lifesteal}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Speed'"></label></td>
+            <td><input type="number"  th:id="addSpeed" value="0" th:field="*{itemStats.speed}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Sturdiness'"></label></td>
+            <td><input type="number"  th:id="addSturdiness" value="0" th:field="*{itemStats.sturdiness}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Corruption Resistance'"></label></td>
+            <td><input type="number"  th:id="addCorruptionResistance" value="0" th:field="*{itemStats.corruption_resistance}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Extra Armor'"></label></td>
+            <td><input type="number"  th:id="addExtraArmor" value="0" th:field="*{itemStats.extra_armor}"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="'Mana'"></label></td>
+            <td><input type="number"  th:id="addMana" value="0" th:field="*{itemStats.mana}"/></td>
+        </tr>
+        <tr>
+            <td><label>Spells</label></td>
+            <td>
+                <label for="spell-search">Search Spells:</label>
+                <input type="text" id="spell-search" list="spellList" placeholder="Type a spell name..." autocomplete="off" />
+                <datalist id="spellList">
+                    <option th:each="spell : ${itemSpellsList}" th:text="${spell.name}" th:data-id="${spell.id}" th:data-description="${spell.description}"></option>
+                </datalist>
+                <button type="button" id="add-spell">Add Spell</button>
+                <input type="hidden" name="selectedSpells" id="selected-spells-input" value="" />
+                <div id="selected-spells">
+                    <h4>Selected Spells</h4>
+                    <ul id="spell-details"></ul>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Dodaj" id="editSubmit"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

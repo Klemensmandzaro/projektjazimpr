@@ -49,6 +49,7 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
         } else {
             ItemSubclass itemSubclass = new ItemSubclass();
             itemSubclass.setSubclassName(itemDto.getItemSubclass().getName());
+            itemSubclass.setItemClass(item.getItemClass());
             item.setItemSubclass(itemSubclass);
         }
 
@@ -65,7 +66,6 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
         itemStats.setDodge(itemDto.getItemStats().getDodge());
         itemStats.setBlock(itemDto.getItemStats().getBlock());
         itemStats.setHealthRegeneration(itemDto.getItemStats().getHealthRegeneration());
-        itemStats.setManaRegeneration(itemDto.getItemStats().getManaRegeneration());
         itemStats.setOtherType(itemDto.getItemStats().getOtherType());
         itemStats.setArcane_resistance(itemDto.getItemStats().getArcane_resistance());
         itemStats.setCrit_ranged(itemDto.getItemStats().getCrit_ranged());
@@ -81,6 +81,22 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
         itemStats.setDamage_max(itemDto.getItemStats().getDamage_max());
         itemStats.setAttack_speed(itemDto.getItemStats().getAttack_speed());
         itemStats.setDPS(itemDto.getItemStats().getDPS());
+        itemStats.setAttack_power(itemDto.getItemStats().getAttack_power());
+        itemStats.setRanged_attack_power(itemDto.getItemStats().getRanged_attack_power());
+        itemStats.setCrafting_speed(itemDto.getItemStats().getCrafting_speed());
+        itemStats.setDeftness(itemDto.getItemStats().getDeftness());
+        itemStats.setFinesse(itemDto.getItemStats().getFinesse());
+        itemStats.setIngenuity(itemDto.getItemStats().getIngenuity());
+        itemStats.setMulticraft(itemDto.getItemStats().getMulticraft());
+        itemStats.setPerception(itemDto.getItemStats().getPerception());
+        itemStats.setResourcefulness(itemDto.getItemStats().getResourcefulness());
+        itemStats.setAvoidance(itemDto.getItemStats().getAvoidance());
+        itemStats.setLifesteal(itemDto.getItemStats().getLifesteal());
+        itemStats.setSpeed(itemDto.getItemStats().getSpeed());
+        itemStats.setSturdiness(itemDto.getItemStats().getSturdiness());
+        itemStats.setCorruption_resistance(itemDto.getItemStats().getCorruption_resistance());
+        itemStats.setExtra_armor(itemDto.getItemStats().getExtra_armor());
+        itemStats.setMana(itemDto.getItemStats().getMana());
         item.setItemStats(itemStats);
 
 
@@ -108,7 +124,20 @@ public class ItemMapper implements IMapEntities<ItemDto, Item> {
 
             } else {
                 ItemSpells itemSpells = new ItemSpells();
-                itemSpells.setName(itemSpellsDto.getName());
+                if (itemSpellsRepository.findByName(itemSpellsDto.getName()).isPresent()) {
+                    if (itemSpellsRepository.findByNameStartingWith(itemSpellsDto.getName()).size() > 1)
+                    {
+                        itemSpells.setName(itemSpellsDto.getName() + itemSpellsRepository.findByNameStartingWith(itemSpellsDto.getName()).size());
+                    }
+                    else
+                    {
+                        itemSpells.setName(itemSpellsDto.getName()+"1");
+                    }
+                }
+                else
+                {
+                    itemSpells.setName(itemSpellsDto.getName());
+                }
                 itemSpells.setDescription(itemSpellsDto.getDescription());
                 itemSpellsList.add(itemSpells);
             }

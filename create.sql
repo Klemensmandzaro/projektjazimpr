@@ -1,12 +1,12 @@
-create table item (blizzard_id bigint, id bigint not null auto_increment, item_class_id bigint, item_media_id bigint, item_set_id bigint, item_stats_id bigint, item_subclass_id bigint, description varchar(255), name varchar(255), primary key (id)) engine=InnoDB;
+create table item (is_created_by_user bit not null, blizzard_id bigint, id bigint not null auto_increment, item_class_id bigint, item_media_id bigint, item_set_id bigint, item_stats_id bigint, item_subclass_id bigint, description varchar(1000), name varchar(255), primary key (id)) engine=InnoDB;
 create table item_item_spells (item_id bigint not null, spell_id bigint not null) engine=InnoDB;
 create table item_set_effects (item_set_id bigint not null, effect varchar(255)) engine=InnoDB;
 create table item_class (id bigint not null auto_increment, class_name varchar(255), primary key (id)) engine=InnoDB;
 create table item_media (id bigint not null auto_increment, icon_url varchar(255), primary key (id)) engine=InnoDB;
 create table item_set (id bigint not null auto_increment, set_name varchar(255), primary key (id)) engine=InnoDB;
-create table item_spells (id bigint not null auto_increment, description varchar(255), name varchar(255), primary key (id)) engine=InnoDB;
-create table item_stats (agility integer, arcane_resistance integer, armor integer, attack_speed integer, block integer, crit_ranged integer, critical_strike integer, damage_max integer, damage_min integer, dodge integer, dps float(53), fire_resistance integer, frost_resistance integer, haste integer, health_regeneration integer, intellect integer, mana_regeneration integer, mastery integer, nature_resistance integer, parry integer, shadow_resistance integer, spell_power integer, spirit integer, stamina integer, strength integer, versatility integer, id bigint not null auto_increment, other_type varchar(255), primary key (id)) engine=InnoDB;
-create table item_subclass (id bigint not null auto_increment, subclass_name varchar(255), primary key (id)) engine=InnoDB;
+create table item_spells (id bigint not null auto_increment, description varchar(1000), name varchar(255), primary key (id)) engine=InnoDB;
+create table item_stats (agility integer, arcane_resistance integer, armor integer, attack_power integer, attack_speed integer, avoidance integer, block integer, corruption_resistance integer, crafting_speed integer, crit_ranged integer, critical_strike integer, damage_max integer, damage_min integer, deftness integer, dodge integer, dps float(53), extra_armor integer, finesse integer, fire_resistance integer, frost_resistance integer, haste integer, health_regeneration integer, ingenuity integer, intellect integer, lifesteal integer, mana integer, mastery integer, multicraft integer, nature_resistance integer, parry integer, perception integer, ranged_attack_power integer, resourcefulness integer, shadow_resistance integer, speed integer, spell_power integer, spirit integer, stamina integer, strength integer, sturdiness integer, versatility integer, id bigint not null auto_increment, other_type varchar(255), primary key (id)) engine=InnoDB;
+create table item_subclass (id bigint not null auto_increment, item_class_id bigint, subclass_name varchar(255), primary key (id)) engine=InnoDB;
 alter table item add constraint UKjidguhkhfwnmper9qam9pd9ud unique (item_media_id);
 alter table item add constraint UKn97vflhnvk7mttfh69rwp6ape unique (item_stats_id);
 alter table item add constraint FKhc10j8kpau312bmp2oa2k5tl7 foreign key (item_class_id) references item_class (id);
@@ -17,3 +17,4 @@ alter table item add constraint FK59l645fqxtw26ctcmdclg1rke foreign key (item_su
 alter table item_item_spells add constraint FKe6fyikrn30ty5vyll3evc54ys foreign key (spell_id) references item_spells (id);
 alter table item_item_spells add constraint FKprg6l7w00u2aohqxw4bekpfx9 foreign key (item_id) references item (id);
 alter table item_set_effects add constraint FK9mjms4os2bw5v2junptrxkket foreign key (item_set_id) references item_set (id);
+alter table item_subclass add constraint FK48urud114l0wb1uqdsec3e4u3 foreign key (item_class_id) references item_class (id);
