@@ -33,9 +33,17 @@
 <table>
     <tr>
         <th>Name</th>
+        <th>Class</th>
     </tr>
     <tr th:each="subclass, iter : ${itemSubclassList}">
         <td th:id="'row-' + ${iter.index+1}+ '-name'" th:text="${subclass.subclassName}"></td>
+        <td th:text="${subclass.itemClass.className}"></td>
+        <td>
+            <form th:action="@{/itemsubclass/delete}" method="post">
+                <input type="hidden" name="id" th:value="${subclass.id}" />
+                <input type="submit" value="Delete" />
+            </form>
+        </td>
     </tr>
 </table>
 </body>

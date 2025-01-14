@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Subclass Edit</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const subclassSelect = document.getElementById("editSubclass");
+            const editedClassSelect = document.getElementById("editedClass");
+
+            subclassSelect.addEventListener('change', function () {
+                const selectedSubclass = subclassSelect.options[subclassSelect.selectedIndex];
+                const itemClassId = selectedSubclass.getAttribute("data-itemClass-id");
+                document.getElementById("editName").value = selectedSubclass.text;
+                editedClassSelect.value = itemClassId;
+            });
+        });
+    </script>
+</head>
+<body>
+<form action="#" th:action="@{/itemsubclass/edit}" th:object="${itemSubclass}" method="post">
+    <table>
+        <tr>
+            <td><label th:text="Subclass"></label></td>
+            <td>
+                <select th:field="*{id}" th:id="editSubclass">
+                    <option value="">Select Subclass</option>
+                    <option th:each="subclass : ${itemSubclassList}" th:value="${subclass.id}" th:text="${subclass.subclassName}" th:data-itemClass-id="${subclass.itemClass.id}" th:data-itemClass-className="${subclass.itemClass.className}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>New Name</label></td>
+            <td><input type="text" th:field="*{subclassName}" th:id="editName"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="Class"></label></td>
+            <td>
+                <select th:field="*{itemClass}" th:id="editedClass">
+                    <option value="">Select Class</option>
+                    <option th:each="class : ${itemClassList}" th:value="${class.id}" th:text="${class.className}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Edit" th:id="editSubmit"/></td>
+
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Class Add</title>
+</head>
+<body>
+<form action="#" th:action="@{/itemsubclass/add}" th:object="${itemSubclass}" method="post">
+    <table>
+        <tr>
+            <td><label th:text="Name"/></td>
+            <td><input type="text" th:field="*{subclassName}" th:id="addName"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Add" th:id="addSubmit"/></td>
+          <td>
+            <select th:field="*{itemClass}" th:id="addClass">
+              <option value="">Select Class</option>
+              <option th:each="class : ${itemClassList}" th:value="${class.id}" th:text="${class.className}"></option>
+            </select>
+          </td>
+        </tr>
+
+    </table>
+</form>
+</body>
+</html>

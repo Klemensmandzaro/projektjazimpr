@@ -46,5 +46,9 @@ public class ItemSet {
     public void setEffects(List<String> effects) {
         this.effects = effects;
     }
+
+    public String wrapEffects() {
+        return String.join(", ", effects);
+    }
 }
 

@@ -51,18 +51,18 @@ public class MyViewService {
         return itemSubclassList;
     }
 
-    public List<ItemSpells> findSelectedItemSpells(Long id) {
+    public List<ItemSpells> findSelectedItemSpells(int page) {
         List<ItemSpells> itemSpellsList = restClient.get()
-                .uri("http://localhost:8082/getselecteditemspells?start="+id+"&limit=10")
+                .uri("http://localhost:8082/getselecteditemspells?page="+page+"&limit=50")
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
 
         return itemSpellsList;
     }
 
-    public List<ItemSet> findSelectedItemSets(Long id) {
+    public List<ItemSet> findSelectedItemSets(int page) {
         List<ItemSet> itemSetList = restClient.get()
-                .uri("http://localhost:8082/getselecteditemsets?start="+id+"&limit=10")
+                .uri("http://localhost:8082/getselecteditemsets?page="+page+"&limit=50")
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
 
@@ -115,6 +115,98 @@ public class MyViewService {
     public void deleteItem(Long id) {
         restClient.post()
                 .uri("http://localhost:8082/deleteitem/"+id)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void addItemClass(ItemClass itemClass) {
+        restClient.post()
+                .uri("http://localhost:8082/additemclass")
+                .body(itemClass)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void editItemClass(ItemClass itemClass) {
+        restClient.patch()
+                .uri("http://localhost:8082/updateitemclass")
+                .body(itemClass)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void deleteItemClass(Long id) {
+        restClient.post()
+                .uri("http://localhost:8082/deleteitemclass/"+id)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void addItemSubclass(ItemSubclass itemSubclass){
+        restClient.post()
+                .uri("http://localhost:8082/additemsubclass")
+                .body(itemSubclass)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void editItemSubclass(ItemSubclass itemSubclass){
+        restClient.post()
+                .uri("http://localhost:8082/updateitemsubclass")
+                .body(itemSubclass)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void deleteItemSubclass(Long id){
+        restClient.post()
+                .uri("http://localhost:8082/deleteitemsubclass/"+id)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void addItemSet(ItemSet itemSet){
+        restClient.post()
+                .uri("http://localhost:8082/additemset")
+                .body(itemSet)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void editItemSet(ItemSet itemSet){
+        restClient.post()
+                .uri("http://localhost:8082/updateitemset")
+                .body(itemSet)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void deleteItemSet(Long id){
+        restClient.post()
+                .uri("http://localhost:8082/deleteitemset/"+id)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void addItemSpell(ItemSpells itemSpells){
+        restClient.post()
+                .uri("http://localhost:8082/additemspell")
+                .body(itemSpells)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void editItemSpell(ItemSpells itemSpells){
+        restClient.post()
+                .uri("http://localhost:8082/updateitemspell")
+                .body(itemSpells)
+                .retrieve()
+                .toBodilessEntity();
+    }
+
+    public void deleteItemSpell(Long id){
+        restClient.post()
+                .uri("http://localhost:8082/deleteitemspell/"+id)
                 .retrieve()
                 .toBodilessEntity();
     }

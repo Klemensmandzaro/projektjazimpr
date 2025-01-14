@@ -27,6 +27,25 @@
         tr:hover {
             background-color: #f1f1f1;
         }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a {
+            margin: 0 5px;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007BFF;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
+        .pagination a.disabled {
+            pointer-events: none;
+            color: #ccc;
+            border-color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -41,8 +60,19 @@
     <tr th:each="itemSpell, iter : ${itemSpellsList}">
         <td th:id="'row-' + ${iter.index+1} + '-name'" th:text="${itemSpell.name}"></td>
         <td th:id="'row-' + ${iter.index+1} + '-description'" th:text="${itemSpell.description}"></td>
+        <td>
+            <form th:action="@{/itemspell/delete}" method="post">
+                <input type="hidden" name="id" th:value="${itemSpell.id}" />
+                <input type="submit" value="Delete" />
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
+<div class="pagination">
+    <a th:href="@{/view/selectedspells(page=${page - 1})}" th:classappend="${page == 0} ? 'disabled'" th:if="${page > 0}">Previous</a>
+    <a th:text="${page}"></a>
+    <a th:href="@{/view/selectedspells(page=${page + 1})}" th:if="${itemSpellsList.size() == 50}">Next</a>
+</div>
 </body>
 </html>

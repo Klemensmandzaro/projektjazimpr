@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Set Add</title>
+  <style>
+    table {
+      margin-top: 20px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      padding: 10px;
+    }
+    label {
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const addBonusButton = document.getElementById('add-bonus');
+      const effectsContainer = document.getElementById('effects-container');
+
+      addBonusButton.addEventListener('click', function (e) {
+        e.preventDefault(); // Zapobiega przeładowaniu strony
+
+        // Tworzymy nowy wiersz dla efektu
+        const div = document.createElement('div');
+        div.style.marginBottom = "10px";
+
+        // Dodajemy pole tekstowe dla efektu
+        div.innerHTML = `
+                    <input type="text" th:field="*{effects}" name="effects" placeholder="Effect description" required />
+                    <button type="button" class="remove-bonus">Remove</button>
+                `;
+
+        // Dodajemy nowy element do kontenera efektów
+        effectsContainer.appendChild(div);
+
+        // Dodajemy obsługę przycisku usuwania
+        const removeButton = div.querySelector('.remove-bonus');
+        removeButton.addEventListener('click', function () {
+          div.remove();
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+<h1>Add Item Set</h1>
+<form th:action="@{/itemset/add}" th:object="${itemSet}" method="post">
+  <table>
+    <tr>
+      <td><label for="name">Name:</label></td>
+      <td><input type="text" id="name" th:field="*{setName}" name="setName" required /></td>
+    </tr>
+  </table>
+
+  <div id="effects-container">
+    <!-- Dynamiczne efekty będą dodawane tutaj -->
+  </div>
+
+  <button id="add-bonus" type="button">Add Bonus</button>
+
+  <div style="margin-top: 20px;">
+    <input type="submit" value="Add" />
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Class Add</title>
+</head>
+<body>
+<form action="#" th:action="@{/itemclass/add}" th:object="${itemClass}" method="post">
+    <table>
+        <tr>
+            <td><label th:text="Name"/></td>
+            <td><input type="text" th:field="*{className}" th:id="addName"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Add" th:id="addSubmit"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

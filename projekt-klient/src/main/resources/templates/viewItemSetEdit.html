@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Item Set</title>
+    <style>
+        table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const editedSet = document.getElementById('editedSet');
+            const effectsContainer = document.getElementById('effects-container');
+
+            editedSet.addEventListener("change", function () {
+                const selectedSet = editedSet.options[editedSet.selectedIndex];
+                document.getElementById('id').value = selectedSet.value;
+
+                // Usuwamy wszystkie istniejące efekty
+                effectsContainer.innerHTML = '';
+
+                // Pobieramy efekty z atrybutu data-effects (już nie musimy używać JSON)
+                const effects = selectedSet.getAttribute('data-effects').split(',');
+
+                // Dodajemy efekty do formularza
+                effects.forEach(effect => {
+                    const div = document.createElement('div');
+                    div.style.marginBottom = "10px";
+                    div.innerHTML = `
+                        <input type="text" name="effects" value="${effect.trim()}" required />
+                        <button type="button" class="remove-bonus">Remove</button>
+                    `;
+                    effectsContainer.appendChild(div);
+
+                    const removeButton = div.querySelector('.remove-bonus');
+                    removeButton.addEventListener('click', function () {
+                        div.remove();
+                    });
+                });
+            });
+
+            const addBonusButton = document.getElementById('add-bonus');
+
+
+            addBonusButton.addEventListener('click', function (e) {
+                e.preventDefault(); // Zapobiega przeładowaniu strony
+
+                // Tworzymy nowy wiersz dla efektu
+                const div = document.createElement('div');
+                div.style.marginBottom = "10px";
+
+                // Dodajemy pole tekstowe dla efektu
+                div.innerHTML = `
+                    <input type="text" th:field="*{effects}" name="effects" placeholder="Effect description" required />
+                    <button type="button" class="remove-bonus">Remove</button>
+                `;
+
+                // Dodajemy nowy element do kontenera efektów
+                effectsContainer.appendChild(div);
+
+                // Dodajemy obsługę przycisku usuwania
+                const removeButton = div.querySelector('.remove-bonus');
+                removeButton.addEventListener('click', function () {
+                    div.remove();
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Edit Item Set</h1>
+<form th:action="@{/itemset/edit}" th:object="${itemSet}" method="post">
+    <table>
+        <tr>
+            <td><label for="editedSet">Select Set</label></td>
+            <td>
+                <select id="editedSet">
+                    <option value="">Select Set</option>
+                    <option th:each="itemSet : ${itemSetList}"
+                            th:value="${itemSet.id}"
+                            th:text="${itemSet.setName}"
+                            th:data-effects="${itemSet.wrapEffects()}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="name">New Name:</label></td>
+            <td><input type="text" id="name" th:field="*{setName}" /></td>
+            <td><input type="hidden" id="id" th:field="*{id}"/> </td>
+        </tr>
+    </table>
+
+    <div id="effects-container">
+        <!-- Efekty zostaną dodane tutaj -->
+    </div>
+
+    <button id="add-bonus" type="button">Add Bonus</button>
+
+    <div style="margin-top: 20px;">
+        <input type="submit" value="Save Changes" />
+    </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Class Edit</title>
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+
+        const classSelect = document.getElementById("editClass");
+
+        classSelect.addEventListener('change', function () {
+          const selectedClass = classSelect.options[classSelect.selectedIndex].value;
+            document.getElementById("editedId").value = selectedClass;
+          });
+      });
+  </script>
+</head>
+<body>
+<form action="#" th:action="@{/itemclass/edit}" th:object="${itemClass}" method="post">
+  <table>
+    <tr>
+      <td><label>Class</label></td>
+      <td>
+        <select id="editClass">
+          <option value="">Select Class</option>
+          <option th:each="class : ${itemClassList}" th:value="${class.id}" th:text="${class.className}"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+        <td><label>New Name</label></td>
+      <td><input type="text" th:field="*{className}"  id="editedName"></td>
+      <td><input type="hidden" th:field="*{id}" id="editedId"></td>
+    </tr>
+    <tr>
+      <td><input type="submit" value="Edit" id="editSubmit"/></td>
+
+    </tr>
+  </table>
+</form>
+</body>
+</html>

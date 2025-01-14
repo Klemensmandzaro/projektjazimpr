@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface ItemSubclassRepository extends JpaRepository<ItemSubclass, Long> {
     Optional<ItemSubclass> findBySubclassName(String name);
+    Optional<ItemSubclass> findByItemClassId(Long id);
 }

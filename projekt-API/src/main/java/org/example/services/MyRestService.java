@@ -30,9 +30,9 @@ public class MyRestService {
     }
 
 
-    public List<Item> getAllItems() {
-        return db.getItems().findFirst10ByOrderByIdAsc();
-    }
+//    public List<Item> getAllItems() {
+//        return db.getItems().findFirst10ByOrderByIdAsc();
+//    }
 
     public List<Item> getSelectedItems(Long start, int limit)
     {
@@ -40,9 +40,9 @@ public class MyRestService {
         return db.getItems().findByIdGreaterThanOrEqual(start, pageable);
     }
 
-    public List<Item> getItemsBetween(Long start, Long end) {
-        return db.getItems().findByIdBetween(start, end);
-    }
+//    public List<Item> getItemsBetween(Long start, Long end) {
+//        return db.getItems().findByIdBetween(start, end);
+//    }
 
     public List<Item> getItemsCreatedByUser() {
         return db.getItems().findByisCreatedByUser(true);
@@ -58,22 +58,23 @@ public class MyRestService {
     }
 
 
-    public List<ItemSet> getBetweenItemSets(Long start, Long end) {
-        return db.getItemSets().findByIdBetween(start, end);
-    }
+//    public List<ItemSet> getBetweenItemSets(Long start, Long end) {
+//        return db.getItemSets().findByIdBetween(start, end);
+//    }
 
+    @Cacheable("itemSets")
     public List<ItemSet> getAllItemSets() {
         return db.getItemSets().findAll();
     }
 
-    public List<ItemSet> getSelectedItemSets(Long start, int limit) {
-        Pageable pageable = PageRequest.of(0, limit);
-        return db.getItemSets().findByIdGreaterThanOrEqual(start, pageable);
+    public List<ItemSet> getSelectedItemSets(int page, int limit) {
+        Pageable pageable = PageRequest.of(page, limit);
+        return db.getItemSets().findAll(pageable).stream().toList();
     }
-
-    public List<ItemSpells> getBetweenItemSpells(Long start, Long end) {
-        return db.getItemSpells().findByIdBetween(start, end);
-    }
+//
+//    public List<ItemSpells> getBetweenItemSpells(Long start, Long end) {
+//        return db.getItemSpells().findByIdBetween(start, end);
+//    }
 
     public ItemSpells getItemSpellById(Long id) {
         return db.getItemSpells().findById(id).orElseThrow(ResourceNotExistException::new);
@@ -84,9 +85,9 @@ public class MyRestService {
         return db.getItemSpells().findAll();
     }
 
-    public List<ItemSpells> getSelectedItemSpells(Long start, int limit) {
-        Pageable pageable = PageRequest.of(0, limit);
-        return db.getItemSpells().findByIdGreaterThanOrEqual(start, pageable);
+    public List<ItemSpells> getSelectedItemSpells(int page, int limit) {
+        Pageable pageable = PageRequest.of(page, limit);
+        return db.getItemSpells().findAll(pageable).stream().toList();
     }
 
     public void addItem(Item item) {
@@ -122,45 +123,54 @@ public class MyRestService {
         db.getItems().save(item);
     }
 
-    public void addItemClass(ItemClassDto itemClassDto) {
+    public void addItemClass(ItemClass itemClass2) {
         ItemClass itemClass = new ItemClass();
-        if (itemClassDto.getName() == null) {
+        if (itemClass2.getClassName() == null) {
             throw new ResourceCantHaveAllNullValuesExceptions();
+        } else if (db.getItemClasses().findByClassName(itemClass2.getClassName()).isPresent()) {
+            throw new ResourceAlreadyExistException();
         }
-        itemClass.setClassName(itemClassDto.getName());
+        itemClass.setClassName(itemClass2.getClassName());
         db.getItemClasses().save(itemClass);
     }
 
-    public void addItemSubclass(ItemSubclassDto itemSubclassDto) {
+    public void addItemSubclass(ItemSubclass itemSubclass2) {
         ItemSubclass itemSubclass = new ItemSubclass();
-        if (itemSubclassDto.getName() == null) {
+        if (itemSubclass2.getSubclassName() == null || itemSubclass2.getItemClass() == null) {
             throw new ResourceCantHaveAllNullValuesExceptions();
+        }else if (db.getItemSubclasses().findBySubclassName(itemSubclass2.getSubclassName()).isPresent()) {
+            throw new ResourceAlreadyExistException();
         }
-        itemSubclass.setSubclassName(itemSubclassDto.getName());
+
+        itemSubclass.setSubclassName(itemSubclass2.getSubclassName());
+        itemSubclass.setItemClass(db.getItemClasses().findByClassName(itemSubclass2.getItemClass().getClassName()).orElseThrow(ResourceNotExistException::new));
+
         db.getItemSubclasses().save(itemSubclass);
     }
 
-    public void addItemSet(ItemSetDto itemSetDto) {
+    public void addItemSet(ItemSet itemSet2) {
         ItemSet itemSet = new ItemSet();
-        if (itemSetDto.getName() != null)
+        if (itemSet2.getSetName() != null)
         {
-            itemSet.setSetName(itemSetDto.getName());
-            itemSet.setEffects(itemSetDto.getEffects());
-        }
-        else
+            itemSet.setSetName(itemSet2.getSetName());
+            itemSet.setEffects(itemSet2.getEffects());
+        } else if (db.getItemSets().findBySetName(itemSet2.getSetName()).isPresent())
+        {
+            throw new ResourceAlreadyExistException();
+        } else
         {
             throw new ResourceCantHaveAllNullValuesExceptions();
         }
         db.getItemSets().save(itemSet);
     }
 
-    public void addItemSpell(ItemSpellsDto itemSpellsDto) {
+    public void addItemSpell(ItemSpells itemSpells2) {
         ItemSpells itemSpells = new ItemSpells();
-        if (itemSpellsDto.getName() == null && itemSpellsDto.getDescription() == null) {
+        if (itemSpells2.getName() == null && itemSpells2.getDescription() == null) {
             throw new ResourceCantHaveAllNullValuesExceptions();
         }
-        itemSpells.setName(itemSpellsDto.getName());
-        itemSpells.setDescription(itemSpellsDto.getDescription());
+        itemSpells.setName(itemSpells2.getName());
+        itemSpells.setDescription(itemSpells2.getDescription());
         db.getItemSpells().save(itemSpells);
     }
 
@@ -237,40 +247,57 @@ public class MyRestService {
         db.getItems().save(item);
     }
 
-    public void updateItemClass(String name) {
-        ItemClass itemClass = db.getItemClasses().findByClassName(name).orElseThrow(ResourceNotExistException::new);
+    public void updateItemClass(ItemClass itemClass2) {
+        ItemClass itemClass = db.getItemClasses().findById(itemClass2.getId()).orElseThrow(ResourceNotExistException::new);
+        if (itemClass2.getClassName() != null)
+        {
+            itemClass.setClassName(itemClass2.getClassName());
+        }
         db.getItemClasses().save(itemClass);
     }
 
-    public void updateItemSubclass(String name) {
-        ItemSubclass itemSubclass = db.getItemSubclasses().findBySubclassName(name).orElseThrow(ResourceNotExistException::new);
+    public void updateItemSubclass(ItemSubclass itemSubclass2) {
+        ItemSubclass itemSubclass = db.getItemSubclasses().findById(itemSubclass2.getId()).orElseThrow(ResourceNotExistException::new);
+        if (itemSubclass2.getSubclassName() != null && itemSubclass2.getItemClass() != null)
+        {
+            itemSubclass.setSubclassName(itemSubclass2.getSubclassName());
+            itemSubclass.setItemClass(db.getItemClasses().findByClassName(itemSubclass2.getItemClass().getClassName()).orElseThrow(ResourceNotExistException::new));
+        }
+        else
+        {
+            throw new ResourceCantHaveAllNullValuesExceptions();
+        }
         db.getItemSubclasses().save(itemSubclass);
     }
 
-    public void updateItemSet(String name, ItemSetDto itemSetDto) {
-        ItemSet itemSet = db.getItemSets().findBySetName(name).orElseThrow(ResourceNotExistException::new);
-        if (itemSetDto.getName() != null)
+    public void updateItemSet(ItemSet itemSet2) {
+        ItemSet itemSet = db.getItemSets().findById(itemSet2.getId()).orElseThrow(ResourceNotExistException::new);
+        if (itemSet2.getSetName() != "")
         {
-            itemSet.setSetName(itemSetDto.getName());
+            itemSet.setSetName(itemSet2.getSetName());
         }
 
-        if (itemSetDto.getEffects() != null)
+        List<String> effects = new ArrayList<>();
+        if (itemSet2.getEffects() != null)
         {
-            itemSet.setEffects(itemSetDto.getEffects());
+            effects.addAll(itemSet2.getEffects());
         }
+        itemSet.setEffects(effects);
         db.getItemSets().save(itemSet);
     }
 
-    public void updateItemSpell(String name, ItemSpellsDto itemSpellsDto) {
-        ItemSpells itemSpells = db.getItemSpells().findByName(name).orElseThrow(ResourceNotExistException::new);
-        if (itemSpellsDto.getName() != null)
+    public void updateItemSpell(ItemSpells itemSpells2) {
+        ItemSpells itemSpells = db.getItemSpells().findById(itemSpells2.getId()).orElseThrow(ResourceNotExistException::new);
+        if (itemSpells2.getName() != "")
         {
-            itemSpells.setName(itemSpellsDto.getName());
+            itemSpells.setName(itemSpells2.getName());
+        } else if (db.getItemSpells().findByName(itemSpells2.getName()).isPresent()) {
+            throw new ResourceCantHaveAllNullValuesExceptions();
         }
 
-        if (itemSpellsDto.getDescription() != null)
+        if (itemSpells2.getDescription() != null)
         {
-            itemSpells.setDescription(itemSpellsDto.getDescription());
+            itemSpells.setDescription(itemSpells2.getDescription());
         }
         db.getItemSpells().save(itemSpells);
     }
@@ -291,9 +318,9 @@ public class MyRestService {
 
     }
 
-    public void deleteItemClass(String name) {
-        ItemClass itemClass = db.getItemClasses().findByClassName(name).orElseThrow(ResourceNotExistException::new);
-        if (db.getItems().findByItemClassClassName(itemClass.getClassName()).isEmpty())
+    public void deleteItemClass(Long id) {
+        ItemClass itemClass = db.getItemClasses().findById(id).orElseThrow(ResourceNotExistException::new);
+        if (db.getItems().findByItemClassClassName(itemClass.getClassName()).isEmpty() && db.getItemSubclasses().findByItemClassId(itemClass.getId()).isEmpty())
         {
             db.getItemClasses().delete(itemClass);
         }
@@ -304,8 +331,8 @@ public class MyRestService {
 
     }
 
-    public void deleteItemSubclass(String name) {
-        ItemSubclass itemSubclass = db.getItemSubclasses().findBySubclassName(name).orElseThrow(ResourceNotExistException::new);
+    public void deleteItemSubclass(Long id) {
+        ItemSubclass itemSubclass = db.getItemSubclasses().findById(id).orElseThrow(ResourceNotExistException::new);
         if (db.getItems().findByItemSubclassSubclassName(itemSubclass.getSubclassName()).isEmpty())
         {
             db.getItemSubclasses().delete(itemSubclass);
@@ -317,8 +344,8 @@ public class MyRestService {
 
     }
 
-    public void deleteItemSet(String name) {
-        ItemSet itemSet = db.getItemSets().findBySetName(name).orElseThrow(ResourceNotExistException::new);
+    public void deleteItemSet(Long id) {
+        ItemSet itemSet = db.getItemSets().findById(id).orElseThrow(ResourceNotExistException::new);
         if (db.getItems().findByItemSetSetName(itemSet.getSetName()).isEmpty())
         {
             db.getItemSets().delete(itemSet);
@@ -330,8 +357,8 @@ public class MyRestService {
 
     }
 
-    public void deleteItemSpell(String name) {
-        ItemSpells itemSpells = db.getItemSpells().findByName(name).orElseThrow(ResourceNotExistException::new);
+    public void deleteItemSpell(Long id) {
+        ItemSpells itemSpells = db.getItemSpells().findById(id).orElseThrow(ResourceNotExistException::new);
         if (db.getItems().findByItemSpellsName(itemSpells.getName()).isEmpty())
         {
             db.getItemSpells().delete(itemSpells);

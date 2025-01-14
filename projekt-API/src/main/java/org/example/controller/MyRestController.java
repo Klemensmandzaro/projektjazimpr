@@ -19,10 +19,10 @@ public class MyRestController {
     }
 
 
-    @GetMapping("/getallitems")
-    public ResponseEntity<List<Item>> getAllItems(){
-        return new ResponseEntity<>(myRestService.getAllItems(), HttpStatus.OK);
-    }
+//    @GetMapping("/getallitems")
+//    public ResponseEntity<List<Item>> getAllItems(){
+//        return new ResponseEntity<>(myRestService.getAllItems(), HttpStatus.OK);
+//    }
 
     @GetMapping("/getselecteditems")
     public ResponseEntity<List<Item>> getSelectedItems(@RequestParam Long start, @RequestParam int limit){
@@ -34,10 +34,10 @@ public class MyRestController {
         return new ResponseEntity<>(myRestService.getItemsCreatedByUser(), HttpStatus.OK);
     }
 
-    @GetMapping("/getitemsbetween")
-    public ResponseEntity<List<Item>> getItemsBetween(@RequestParam Long start,@RequestParam Long end){
-        return new ResponseEntity<>(myRestService.getItemsBetween(start, end), HttpStatus.OK);
-    }
+//    @GetMapping("/getitemsbetween")
+//    public ResponseEntity<List<Item>> getItemsBetween(@RequestParam Long start,@RequestParam Long end){
+//        return new ResponseEntity<>(myRestService.getItemsBetween(start, end), HttpStatus.OK);
+//    }
 
     @GetMapping("/getallitemclasses")
     public ResponseEntity<List<ItemClass>> getAllItemClasses(){
@@ -49,10 +49,10 @@ public class MyRestController {
         return new ResponseEntity<>(myRestService.getAllItemSubclasses(), HttpStatus.OK);
     }
 
-    @GetMapping("/getitemsetsbetween")
-    public ResponseEntity<List<ItemSet>> getAllItemSets(@RequestParam Long start, @RequestParam Long end){
-        return new ResponseEntity<>(myRestService.getBetweenItemSets(start, end), HttpStatus.OK);
-    }
+//    @GetMapping("/getitemsetsbetween")
+//    public ResponseEntity<List<ItemSet>> getAllItemSets(@RequestParam Long start, @RequestParam Long end){
+//        return new ResponseEntity<>(myRestService.getBetweenItemSets(start, end), HttpStatus.OK);
+//    }
 
     @GetMapping("/getallitemsets")
     public ResponseEntity<List<ItemSet>> getAllItemSets(){
@@ -60,8 +60,8 @@ public class MyRestController {
     }
 
     @GetMapping("/getselecteditemsets")
-    public ResponseEntity<List<ItemSet>> getSelectedItemSets(@RequestParam Long start, @RequestParam int limit){
-        return new ResponseEntity<>(myRestService.getSelectedItemSets(start, limit), HttpStatus.OK);
+    public ResponseEntity<List<ItemSet>> getSelectedItemSets(@RequestParam int page, @RequestParam int limit){
+        return new ResponseEntity<>(myRestService.getSelectedItemSets(page, limit), HttpStatus.OK);
     }
 
     @GetMapping("/getallitemspells")
@@ -69,14 +69,14 @@ public class MyRestController {
         return new ResponseEntity<>(myRestService.getAllItemSpells(), HttpStatus.OK);
     }
 
-    @GetMapping("/getitemspellsbetween")
-    public ResponseEntity<List<ItemSpells>> getBetweenItemSpells(@RequestParam Long start, @RequestParam Long end){
-        return new ResponseEntity<>(myRestService.getBetweenItemSpells(start, end), HttpStatus.OK);
-    }
+//    @GetMapping("/getitemspellsbetween")
+//    public ResponseEntity<List<ItemSpells>> getBetweenItemSpells(@RequestParam Long start, @RequestParam Long end){
+//        return new ResponseEntity<>(myRestService.getBetweenItemSpells(start, end), HttpStatus.OK);
+//    }
 
     @GetMapping("/getselecteditemspells")
-    public ResponseEntity<List<ItemSpells>> getSelectedSpells(@RequestParam Long start, @RequestParam int limit){
-        return new ResponseEntity<>(myRestService.getSelectedItemSpells(start, limit), HttpStatus.OK);
+    public ResponseEntity<List<ItemSpells>> getSelectedSpells(@RequestParam int page, @RequestParam int limit){
+        return new ResponseEntity<>(myRestService.getSelectedItemSpells(page, limit), HttpStatus.OK);
     }
 
     @GetMapping("/getitemspellbyid/{id}")
@@ -91,26 +91,26 @@ public class MyRestController {
     }
 
     @PostMapping("/additemclass")
-    public ResponseEntity<Void> addItemClass(@RequestBody ItemClassDto itemClassDto){
-        myRestService.addItemClass(itemClassDto);
+    public ResponseEntity<Void> addItemClass(@RequestBody ItemClass itemClass){
+        myRestService.addItemClass(itemClass);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/additemsubclass")
-    public ResponseEntity<Void> addItemSubclass(@RequestBody ItemSubclassDto itemSubclassDto){
-        myRestService.addItemSubclass(itemSubclassDto);
+    public ResponseEntity<Void> addItemSubclass(@RequestBody ItemSubclass itemSubclass){
+        myRestService.addItemSubclass(itemSubclass);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/additemset")
-    public ResponseEntity<Void> addItemSet(@RequestBody ItemSetDto itemSetDto){
-        myRestService.addItemSet(itemSetDto);
+    public ResponseEntity<Void> addItemSet(@RequestBody ItemSet itemSet){
+        myRestService.addItemSet(itemSet);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/additemspell")
-    public ResponseEntity<Void> addItemSpell(@RequestBody ItemSpellsDto itemSpellsDto){
-        myRestService.addItemSpell(itemSpellsDto);
+    public ResponseEntity<Void> addItemSpell(@RequestBody ItemSpells itemSpells){
+        myRestService.addItemSpell(itemSpells);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -120,27 +120,27 @@ public class MyRestController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/updateitemclass/{name}")
-    public ResponseEntity<Void> updateItemClass(@PathVariable String name){
-        myRestService.updateItemClass(name);
+    @PatchMapping("/updateitemclass")
+    public ResponseEntity<Void> updateItemClass(@RequestBody ItemClass itemClass){
+        myRestService.updateItemClass(itemClass);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/updateitemsubclass/{name}")
-    public ResponseEntity<Void> updateItemSubclass(@PathVariable String name){
-        myRestService.updateItemSubclass(name);
+    @PostMapping("/updateitemsubclass")
+    public ResponseEntity<Void> updateItemSubclass(@RequestBody ItemSubclass itemSubclass){
+        myRestService.updateItemSubclass(itemSubclass);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/updateitemset/{name}")
-    public ResponseEntity<Void> updateItemSet(@PathVariable String name, @RequestBody ItemSetDto itemSetDto){
-        myRestService.updateItemSet(name, itemSetDto);
+    @PostMapping("/updateitemset")
+    public ResponseEntity<Void> updateItemSet(@RequestBody ItemSet itemSet){
+        myRestService.updateItemSet(itemSet);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/updateitemspell/{name}")
-    public ResponseEntity<Void> updateItemSpell(@PathVariable String name, @RequestBody ItemSpellsDto itemSpellsDto){
-        myRestService.updateItemSpell(name, itemSpellsDto);
+    @PostMapping("/updateitemspell")
+    public ResponseEntity<Void> updateItemSpell(@RequestBody ItemSpells itemSpells){
+        myRestService.updateItemSpell(itemSpells);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
@@ -150,27 +150,27 @@ public class MyRestController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/deleteitemclass/{name}")
-    public ResponseEntity<Void> deleteItemClass(@PathVariable String name){
-        myRestService.deleteItemClass(name);
+    @PostMapping("/deleteitemclass/{id}")
+    public ResponseEntity<Void> deleteItemClass(@PathVariable Long id){
+        myRestService.deleteItemClass(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/deleteitemsubclass/{name}")
-    public ResponseEntity<Void> deleteItemSubclass(@PathVariable String name){
-        myRestService.deleteItemSubclass(name);
+    @PostMapping("/deleteitemsubclass/{id}")
+    public ResponseEntity<Void> deleteItemSubclass(@PathVariable Long id){
+        myRestService.deleteItemSubclass(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/deleteitemset/{name}")
-    public ResponseEntity<Void> deleteItemSet(@PathVariable String name){
-        myRestService.deleteItemSet(name);
+    @PostMapping("/deleteitemset/{id}")
+    public ResponseEntity<Void> deleteItemSet(@PathVariable Long id){
+        myRestService.deleteItemSet(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/deleteitemspell/{name}")
-    public ResponseEntity<Void> deleteItemSpell(@PathVariable String name){
-        myRestService.deleteItemSpell(name);
+    @PostMapping("/deleteitemspell/{id}")
+    public ResponseEntity<Void> deleteItemSpell(@PathVariable Long id){
+        myRestService.deleteItemSpell(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 

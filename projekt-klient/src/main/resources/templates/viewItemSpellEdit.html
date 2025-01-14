@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Spell Edit</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const editedSpell = document.getElementById('editedSpell');
+
+      editedSpell.addEventListener("change", function () {
+        const selectedSpell = editedSpell.options[editedSpell.selectedIndex];
+        document.getElementById('id').value = selectedSpell.value;
+        document.getElementById('editDescription').value = selectedSpell.getAttribute('data-description');
+      });
+    });
+  </script>
+</head>
+<body>
+<form action="#" th:action="@{/itemspell/edit}" th:object="${itemSpell}" method="post">
+    <table>
+      <tr>
+        <td><label for="editedSpell">Select Spell</label></td>
+        <td>
+          <select id="editedSpell">
+            <option value="">Select Set</option>
+            <option th:each="itemSpell : ${itemSpellsList}"
+                    th:value="${itemSpell.id}"
+                    th:text="${itemSpell.name}"
+                    th:data-description="${itemSpell.description}">
+            </option>
+          </select>
+        </td>
+      </tr>
+        <tr>
+            <td><label/>New Name</td>
+
+            <td>
+              <input type="hidden" th:field="*{id}" th:id="id"/>
+              <input type="text" th:field="*{name}" th:id="editName"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label th:text="Description"/></td>
+            <td><input type="text" th:field="*{description}" th:id="editDescription"/></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Edit" th:id="editSubmit"/>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Spell Add</title>
+</head>
+<body>
+<form action="#" th:action="@{/itemspell/add}" th:object="${itemSpell}" method="post">
+    <table>
+        <tr>
+            <td><label th:text="Name"/></td>
+            <td><input type="text" th:field="*{name}" th:id="addName"/></td>
+        </tr>
+        <tr>
+            <td><label th:text="Description"/></td>
+            <td><input type="text" th:field="*{description}" th:id="addDescription"/></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Add" th:id="addSubmit"/>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
