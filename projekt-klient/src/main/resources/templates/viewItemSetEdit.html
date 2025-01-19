@@ -77,7 +77,7 @@
     </script>
 </head>
 <body>
-<h1>Edit Item Set</h1>
+<h1 id="naglowek">Edit Item Set</h1>
 <form th:action="@{/itemset/edit}" th:object="${itemSet}" method="post">
     <table>
         <tr>
@@ -107,7 +107,7 @@
     <button id="add-bonus" type="button">Add Bonus</button>
 
     <div style="margin-top: 20px;">
-        <input type="submit" value="Save Changes" />
+        <input type="submit" id="editSubmit" value="Save Changes" />
     </div>
 </form>
 </body>

@@ -29,16 +29,17 @@ public class MyRestService {
         this.db = db;
     }
 
-
-//    public List<Item> getAllItems() {
-//        return db.getItems().findFirst10ByOrderByIdAsc();
-//    }
-
-    public List<Item> getSelectedItems(Long start, int limit)
-    {
-        Pageable pageable = PageRequest.of(0, limit);
-        return db.getItems().findByIdGreaterThanOrEqual(start, pageable);
+    @Cacheable("items")
+    public List<Item> getAllItems(int page, int limit) {
+        Pageable pageable = PageRequest.of(page, limit);
+        return db.getItems().findAll(pageable).stream().toList();
     }
+
+//    public List<Item> getSelectedItems(Long start, int limit)
+//    {
+//        Pageable pageable = PageRequest.of(0, limit);
+//        return db.getItems().findByIdGreaterThanOrEqual(start, pageable);
+//    }
 
 //    public List<Item> getItemsBetween(Long start, Long end) {
 //        return db.getItems().findByIdBetween(start, end);
@@ -116,8 +117,9 @@ public class MyRestService {
                     throw new ResourceNotExistException();
                 }
             }
-            item.setItemSpells(itemSpellsList);
+
         }
+        item.setItemSpells(itemSpellsList);
         item.setCreatedByUser(true);
 
         db.getItems().save(item);
@@ -125,7 +127,7 @@ public class MyRestService {
 
     public void addItemClass(ItemClass itemClass2) {
         ItemClass itemClass = new ItemClass();
-        if (itemClass2.getClassName() == null) {
+        if (itemClass2.getClassName() == null || itemClass2.getClassName().equals("")) {
             throw new ResourceCantHaveAllNullValuesExceptions();
         } else if (db.getItemClasses().findByClassName(itemClass2.getClassName()).isPresent()) {
             throw new ResourceAlreadyExistException();
@@ -136,7 +138,7 @@ public class MyRestService {
 
     public void addItemSubclass(ItemSubclass itemSubclass2) {
         ItemSubclass itemSubclass = new ItemSubclass();
-        if (itemSubclass2.getSubclassName() == null || itemSubclass2.getItemClass() == null) {
+        if (itemSubclass2.getSubclassName() == null || itemSubclass2.getItemClass() == null || itemSubclass2.getSubclassName().equals("") || itemSubclass2.getItemClass().getClassName().equals("")) {
             throw new ResourceCantHaveAllNullValuesExceptions();
         }else if (db.getItemSubclasses().findBySubclassName(itemSubclass2.getSubclassName()).isPresent()) {
             throw new ResourceAlreadyExistException();
@@ -185,10 +187,6 @@ public class MyRestService {
                 throw new ResourceAlreadyExistException();
             }
         }
-
-
-
-
 
         if (item2.getItemStats() != null)
         {
@@ -249,7 +247,15 @@ public class MyRestService {
 
     public void updateItemClass(ItemClass itemClass2) {
         ItemClass itemClass = db.getItemClasses().findById(itemClass2.getId()).orElseThrow(ResourceNotExistException::new);
-        if (itemClass2.getClassName() != null)
+        if (itemClass2.getClassName() == null)
+        {
+            throw new ResourceCantHaveAllNullValuesExceptions();
+        }
+        else if (db.getItemClasses().findByClassName(itemClass2.getClassName()).isPresent())
+        {
+            throw new ResourceAlreadyExistException();
+        }
+        else
         {
             itemClass.setClassName(itemClass2.getClassName());
         }
@@ -262,6 +268,13 @@ public class MyRestService {
         {
             itemSubclass.setSubclassName(itemSubclass2.getSubclassName());
             itemSubclass.setItemClass(db.getItemClasses().findByClassName(itemSubclass2.getItemClass().getClassName()).orElseThrow(ResourceNotExistException::new));
+        } else if (itemSubclass2.getSubclassName() == null && itemSubclass2.getItemClass() != null)
+        {
+            itemSubclass.setItemClass(db.getItemClasses().findByClassName(itemSubclass2.getItemClass().getClassName()).orElseThrow(ResourceNotExistException::new));
+
+        } else if (itemSubclass2.getSubclassName() != null && db.getItemSubclasses().findBySubclassName(itemSubclass2.getSubclassName()).isPresent())
+        {
+            throw new ResourceAlreadyExistException();
         }
         else
         {
@@ -274,7 +287,15 @@ public class MyRestService {
         ItemSet itemSet = db.getItemSets().findById(itemSet2.getId()).orElseThrow(ResourceNotExistException::new);
         if (itemSet2.getSetName() != "")
         {
-            itemSet.setSetName(itemSet2.getSetName());
+
+            if (db.getItemSets().findBySetName(itemSet2.getSetName()).isPresent())
+            {
+                throw new ResourceAlreadyExistException();
+            }
+            else
+            {
+                itemSet.setSetName(itemSet2.getSetName());
+            }
         }
 
         List<String> effects = new ArrayList<>();
@@ -288,11 +309,12 @@ public class MyRestService {
 
     public void updateItemSpell(ItemSpells itemSpells2) {
         ItemSpells itemSpells = db.getItemSpells().findById(itemSpells2.getId()).orElseThrow(ResourceNotExistException::new);
-        if (itemSpells2.getName() != "")
+         if (db.getItemSpells().findByName(itemSpells2.getName()).isPresent()) {
+            throw new ResourceAlreadyExistException();
+        }
+         else if (itemSpells2.getName() != "")
         {
             itemSpells.setName(itemSpells2.getName());
-        } else if (db.getItemSpells().findByName(itemSpells2.getName()).isPresent()) {
-            throw new ResourceCantHaveAllNullValuesExceptions();
         }
 
         if (itemSpells2.getDescription() != null)

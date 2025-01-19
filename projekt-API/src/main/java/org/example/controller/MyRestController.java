@@ -19,15 +19,15 @@ public class MyRestController {
     }
 
 
-//    @GetMapping("/getallitems")
-//    public ResponseEntity<List<Item>> getAllItems(){
-//        return new ResponseEntity<>(myRestService.getAllItems(), HttpStatus.OK);
-//    }
-
-    @GetMapping("/getselecteditems")
-    public ResponseEntity<List<Item>> getSelectedItems(@RequestParam Long start, @RequestParam int limit){
-        return new ResponseEntity<>(myRestService.getSelectedItems(start, limit), HttpStatus.OK);
+    @GetMapping("/getallitems")
+    public ResponseEntity<List<Item>> getAllItems(@RequestParam int page, @RequestParam int limit){
+        return new ResponseEntity<>(myRestService.getAllItems(page ,limit), HttpStatus.OK);
     }
+
+//    @GetMapping("/getselecteditems")
+//    public ResponseEntity<List<Item>> getSelectedItems(@RequestParam Long start, @RequestParam int limit){
+//        return new ResponseEntity<>(myRestService.getSelectedItems(start, limit), HttpStatus.OK);
+//    }
 
     @GetMapping("/getitemscreatedbyuser")
     public ResponseEntity<List<Item>> getItemsCreatedByUser(){

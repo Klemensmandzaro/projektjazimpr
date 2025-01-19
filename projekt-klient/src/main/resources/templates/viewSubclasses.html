@@ -41,7 +41,7 @@
         <td>
             <form th:action="@{/itemsubclass/delete}" method="post">
                 <input type="hidden" name="id" th:value="${subclass.id}" />
-                <input type="submit" value="Delete" />
+                <input type="submit" th:id="${iter.index+1}+ '-delete'" value="Delete" />
             </form>
         </td>
     </tr>

@@ -19,18 +19,19 @@ public class MyViewController {
         this.myViewService = myViewService;
     }
 
-    @GetMapping("view/selecteditems")
-    public String viewSelected(Model model, @RequestParam Long id) {
-        List<Item> itemList = myViewService.findSelectedItems(id);
+    @GetMapping("view/items")
+    public String viewSelected(Model model, @RequestParam int page) {
+        List<Item> itemList = myViewService.findItems(page);
         model.addAttribute("itemList", itemList);
-        return "viewSelectedItems";
+        model.addAttribute("page", page);
+        return "viewItems";
     }
 
     @GetMapping("view/itemscreatedbyuser")
     public String viewItemsCreatedByUser(Model model) {
         List<Item> itemList = myViewService.findItemsCreatedByUser();
         model.addAttribute("itemList", itemList);
-        return "viewSelectedItems";
+        return "viewItems";
     }
 
     @GetMapping("view/classes")
@@ -47,20 +48,20 @@ public class MyViewController {
         return "viewSubclasses";
     }
 
-    @GetMapping("view/selectedspells")
+    @GetMapping("view/spells")
     public String viewSelectedSpells(Model model, @RequestParam int page) {
         List<ItemSpells> itemSpellsList = myViewService.findSelectedItemSpells(page);
         model.addAttribute("itemSpellsList", itemSpellsList);
         model.addAttribute("page", page);
-        return "viewSelectedSpells";
+        return "viewSpells";
     }
 
-    @GetMapping("view/selectedsets")
+    @GetMapping("view/sets")
     public String viewSelectedSets(Model model, @RequestParam int page) {
         List<ItemSet> itemSetList = myViewService.findSelectedItemSets(page);
         model.addAttribute("page", page);
         model.addAttribute("itemSetList", itemSetList);
-        return "viewSelectedSets";
+        return "viewSets";
     }
 
     @GetMapping("view/itemadd")
@@ -75,15 +76,19 @@ public class MyViewController {
 
     @PostMapping("/item/add")
     public String addItem(@ModelAttribute Item item, @RequestParam("selectedSpells") String selectedSpells) throws Exception {
-        List<Long> spellIds = Arrays.stream(selectedSpells.split(","))
-                .map(Long::valueOf)
-                .collect(Collectors.toList());
-        List<ItemSpells> itemSpellsList = new ArrayList<>();
-        for (Long spellId : spellIds) {
-            itemSpellsList.add(myViewService.findItemSpellById(spellId));
+        try {
+            List<Long> spellIds = Arrays.stream(selectedSpells.split(","))
+                    .map(Long::valueOf)
+                    .collect(Collectors.toList());
+            List<ItemSpells> itemSpellsList = new ArrayList<>();
+            for (Long spellId : spellIds) {
+                itemSpellsList.add(myViewService.findItemSpellById(spellId));
+            }
+            item.setItemSpells(itemSpellsList);
+            myViewService.addItem(item);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
         }
-        item.setItemSpells(itemSpellsList);
-        myViewService.addItem(item);
         return "redirect:/view/itemscreatedbyuser";
     }
 
@@ -100,16 +105,20 @@ public class MyViewController {
 
     @PostMapping("/item/edit")
     public String editItem(@ModelAttribute Item item, @RequestParam("selectedSpells") String selectedSpells, @RequestParam("selectedName") String name) throws Exception {
-        List<Long> spellIds = Arrays.stream(selectedSpells.split(","))
-                .map(Long::valueOf)
-                .collect(Collectors.toList());
-        List<ItemSpells> itemSpellsList = new ArrayList<>();
-        for (Long spellId : spellIds) {
-            itemSpellsList.add(myViewService.findItemSpellById(spellId));
+        try {
+            List<Long> spellIds = Arrays.stream(selectedSpells.split(","))
+                    .map(Long::valueOf)
+                    .collect(Collectors.toList());
+            List<ItemSpells> itemSpellsList = new ArrayList<>();
+            for (Long spellId : spellIds) {
+                itemSpellsList.add(myViewService.findItemSpellById(spellId));
+            }
+            item.setItemSpells(itemSpellsList);
+            item.setName(name);
+            myViewService.editItem(item);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
         }
-        item.setItemSpells(itemSpellsList);
-        item.setName(name);
-        myViewService.editItem(item);
         return "redirect:/view/itemscreatedbyuser";
     }
 
@@ -127,8 +136,12 @@ public class MyViewController {
     }
 
     @PostMapping("/itemclass/add")
-    public String addItemClass(@ModelAttribute ItemClass itemClass) {
-        myViewService.addItemClass(itemClass);
+    public String addItemClass(@ModelAttribute ItemClass itemClass) throws Exception {
+        try {
+            myViewService.addItemClass(itemClass);
+        } catch (Exception e) {
+            throw new Exception("Error adding itemClass: " + e.getMessage());
+        }
         return "redirect:/view/classes";
     }
 
@@ -140,8 +153,12 @@ public class MyViewController {
     }
 
     @PostMapping("/itemclass/edit")
-    public String editItemClass(@ModelAttribute ItemClass itemClass) {
-        myViewService.editItemClass(itemClass);
+    public String editItemClass(@ModelAttribute ItemClass itemClass) throws Exception {
+        try {
+            myViewService.editItemClass(itemClass);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
         return "redirect:/view/classes";
     }
 
@@ -159,8 +176,12 @@ public class MyViewController {
     }
 
     @PostMapping("/itemsubclass/add")
-    public String addItemSubclass(@ModelAttribute ItemSubclass itemSubclass) {
-        myViewService.addItemSubclass(itemSubclass);
+    public String addItemSubclass(@ModelAttribute ItemSubclass itemSubclass) throws Exception {
+        try {
+            myViewService.addItemSubclass(itemSubclass);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
         return "redirect:/view/subclasses";
     }
 
@@ -173,8 +194,12 @@ public class MyViewController {
     }
 
     @PostMapping("/itemsubclass/edit")
-    public String editItemSubclass(@ModelAttribute ItemSubclass itemSubclass) {
-        myViewService.editItemSubclass(itemSubclass);
+    public String editItemSubclass(@ModelAttribute ItemSubclass itemSubclass) throws Exception {
+        try {
+            myViewService.editItemSubclass(itemSubclass);
+        }catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
         return "redirect:/view/subclasses";
     }
 
@@ -191,9 +216,13 @@ public class MyViewController {
     }
 
     @PostMapping("/itemset/add")
-    public String addItemSet(@ModelAttribute ItemSet itemSet) {
-        myViewService.addItemSet(itemSet);
-        return "redirect:/view/selectedsets?page=0";
+    public String addItemSet(@ModelAttribute ItemSet itemSet) throws Exception {
+        try {
+            myViewService.addItemSet(itemSet);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
+        return "redirect:/view/sets?page=0";
     }
 
     @GetMapping("view/itemsetedit")
@@ -204,15 +233,19 @@ public class MyViewController {
     }
 
     @PostMapping("/itemset/edit")
-    public String editItemSet(@ModelAttribute ItemSet itemSet) {
-        myViewService.editItemSet(itemSet);
-        return "redirect:/view/selectedsets?page=0";
+    public String editItemSet(@ModelAttribute ItemSet itemSet) throws Exception {
+        try {
+            myViewService.editItemSet(itemSet);
+        }catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
+        return "redirect:/view/sets?page=0";
     }
 
     @PostMapping("/itemset/delete")
     public String deleteItemSet(@RequestParam Long id) {
         myViewService.deleteItemSet(id);
-        return "redirect:/view/selectedsets?page=0";
+        return "redirect:/view/sets?page=0";
     }
 
     @GetMapping("view/itemspelladd")
@@ -222,9 +255,13 @@ public class MyViewController {
     }
 
     @PostMapping("/itemspell/add")
-    public String addItemSpell(@ModelAttribute ItemSpells itemSpells) {
-        myViewService.addItemSpell(itemSpells);
-        return "redirect:/view/selectedspells?page=0";
+    public String addItemSpell(@ModelAttribute ItemSpells itemSpells) throws Exception {
+        try {
+            myViewService.addItemSpell(itemSpells);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
+        return "redirect:/view/spells?page=0";
     }
 
     @GetMapping("view/itemspelledit")
@@ -235,14 +272,18 @@ public class MyViewController {
     }
 
     @PostMapping("/itemspell/edit")
-    public String editItemSpell(@ModelAttribute ItemSpells itemSpells) {
-        myViewService.editItemSpell(itemSpells);
-        return "redirect:/view/selectedspells?page=0";
+    public String editItemSpell(@ModelAttribute ItemSpells itemSpells) throws Exception {
+        try {
+            myViewService.editItemSpell(itemSpells);
+        } catch (Exception e) {
+            throw new Exception("Error adding item: " + e.getMessage());
+        }
+        return "redirect:/view/spells?page=0";
     }
 
     @PostMapping("/itemspell/delete")
     public String deleteItemSpell(@RequestParam Long id) {
         myViewService.deleteItemSpell(id);
-        return "redirect:/view/selectedspells?page=0";
+        return "redirect:/view/spells?page=0";
     }
 }

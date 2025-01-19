@@ -15,9 +15,9 @@ public class MyViewService {
         this.restClient = restClient;
     }
 
-    public List<Item> findSelectedItems(Long id) {
+    public List<Item> findItems(int page) {
         List<Item> itemList = restClient.get()
-                .uri("http://localhost:8082/getselecteditems?start="+id+"&limit=10")
+                .uri("http://localhost:8082/getallitems?page="+page+"&limit=50")
                 .retrieve()
                 .body(new ParameterizedTypeReference<>() {});
 

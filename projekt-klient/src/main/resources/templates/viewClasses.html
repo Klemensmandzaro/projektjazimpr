@@ -39,8 +39,8 @@
       <td th:id="'row-' + ${iter.index+1}+ '-name'" th:text="${class.className}"></td>
       <td>
         <form th:action="@{/itemclass/delete}" method="post">
-          <input type="hidden" name="id" th:value="${class.id}" />
-          <input type="submit" value="Delete" />
+          <input type="hidden" name="id"  th:value="${class.id}" />
+          <input type="submit" th:id="${iter.index+1}+ '-delete'"  value="Delete" />
         </form>
       </td>
     </tr>
