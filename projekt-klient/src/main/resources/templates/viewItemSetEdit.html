@@ -4,16 +4,82 @@
     <meta charset="UTF-8">
     <title>Edit Item Set</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1#naglowek {
+            text-align: center;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
         table {
-            margin-top: 20px;
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
+
         td {
             padding: 10px;
         }
+
         label {
             font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], button#add-bonus {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        input[type="submit"]:hover, button#add-bonus:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button.remove-bonus {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        button.remove-bonus:hover {
+            background-color: #d32f2f;
         }
     </style>
     <script>
@@ -25,13 +91,13 @@
                 const selectedSet = editedSet.options[editedSet.selectedIndex];
                 document.getElementById('id').value = selectedSet.value;
 
-                // Usuwamy wszystkie istniejące efekty
+
                 effectsContainer.innerHTML = '';
 
-                // Pobieramy efekty z atrybutu data-effects (już nie musimy używać JSON)
+
                 const effects = selectedSet.getAttribute('data-effects').split(',');
 
-                // Dodajemy efekty do formularza
+
                 effects.forEach(effect => {
                     const div = document.createElement('div');
                     div.style.marginBottom = "10px";
@@ -52,22 +118,22 @@
 
 
             addBonusButton.addEventListener('click', function (e) {
-                e.preventDefault(); // Zapobiega przeładowaniu strony
+                e.preventDefault();
 
-                // Tworzymy nowy wiersz dla efektu
+
                 const div = document.createElement('div');
                 div.style.marginBottom = "10px";
 
-                // Dodajemy pole tekstowe dla efektu
+
                 div.innerHTML = `
                     <input type="text" th:field="*{effects}" name="effects" placeholder="Effect description" required />
                     <button type="button" class="remove-bonus">Remove</button>
                 `;
 
-                // Dodajemy nowy element do kontenera efektów
+
                 effectsContainer.appendChild(div);
 
-                // Dodajemy obsługę przycisku usuwania
+
                 const removeButton = div.querySelector('.remove-bonus');
                 removeButton.addEventListener('click', function () {
                     div.remove();
@@ -77,6 +143,10 @@
     </script>
 </head>
 <body>
+<form id="logoutForm" action="/logout" method="POST" style="display: none;">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+<a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
 <h1 id="naglowek">Edit Item Set</h1>
 <form th:action="@{/itemset/edit}" th:object="${itemSet}" method="post">
     <table>
@@ -101,7 +171,7 @@
     </table>
 
     <div id="effects-container">
-        <!-- Efekty zostaną dodane tutaj -->
+
     </div>
 
     <button id="add-bonus" type="button">Add Bonus</button>

@@ -61,7 +61,7 @@
             const selectedSpellsInput = document.getElementById("selected-spells-input");
 
 
-            // Filter `itemList` based on input
+
             itemSearch.addEventListener('input', function () {
                 const searchValue = itemSearch.value.toLowerCase();
                 const options = itemList.querySelectorAll('option');
@@ -71,7 +71,7 @@
 
             });
 
-            // Update `classSearch` and `subclassSearch` on item selection
+
             itemSearch.addEventListener('change', function () {
                 const selectedItem = itemList.querySelector(`option[value="${itemSearch.value}"]`);
                 if (selectedItem) {
@@ -91,7 +91,7 @@
                         statFields[stat].value = selectedItem.getAttribute(`data-stats-${stat}`) || 0;
                     }
 
-                    spellDetails.innerHTML = ""; // Clear current list
+                    spellDetails.innerHTML = "";
 
                     const spells = selectedItem.getAttribute('data-spells') || "";
                     const spellIds = spells.split(",").map(spellId => spellId.trim());
@@ -113,7 +113,7 @@
                         }
                     });
 
-                    // Update the hidden input with existing spell IDs
+
                     selectedSpellsInput.value = spellIds.join(",");
                 }
 
@@ -135,11 +135,11 @@
             editButton.addEventListener('click', function (event) {
                 if (!itemSearch.value.trim()) {
                     alert("Please select or type an item name.");
-                    event.preventDefault(); // Prevent form submission
+                    event.preventDefault();
                     return;
                 }
 
-                // Update hidden field for selected item name
+
                 selectedNameInput.value = itemSearch.value.trim();
             });
 
@@ -162,7 +162,7 @@
                 const spellDescription = selectedOption.getAttribute("data-description");
                 const spellId = selectedOption.getAttribute("data-id");
 
-                // Check if the spell is already added
+
                 const existingSpell = Array.from(document.querySelectorAll("#spell-details li")).find(
                     (item) => item.getAttribute("data-id") === spellId
                 );
@@ -172,7 +172,7 @@
                     return;
                 }
 
-                // Add the spell to the list
+
                 const listItem = document.createElement("li");
                 listItem.setAttribute("data-id", spellId);
                 listItem.innerHTML = `<strong>${selectedSpellName}</strong>: ${spellDescription}`;
@@ -182,13 +182,13 @@
                 listItem.appendChild(removeButton);
                 spellDetails.appendChild(listItem);
 
-                // Update the hidden input value
+
                 const selectedSpellsInput = document.getElementById("selected-spells-input");
                 const currentValues = selectedSpellsInput.value ? selectedSpellsInput.value.split(",") : [];
                 currentValues.push(spellId);
                 selectedSpellsInput.value = currentValues.join(",");
 
-                // Clear the input field
+
                 spellSearch.value = "";
             });
 
@@ -207,8 +207,63 @@
         });
 
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .table-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 4px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<form id="logoutForm" action="/logout" method="POST" style="display: none;">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+<a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
 <h1 id="naglowek">Formularz edytowania dla Przedmiotów</h1>
 <form action="#" th:action="@{/item/edit}" th:object="${item}" method="post">
     <table>

@@ -8,43 +8,54 @@
             font-family: Arial, sans-serif;
             margin: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+
         tr:hover {
             background-color: #f1f1f1;
         }
+
         .stat-table, .spell-table {
             width: 100%;
             border-collapse: collapse;
         }
+
         .stat-table td, .spell-table td {
             border: none;
             padding: 4px;
         }
+
         .icon-column {
             width: 50px;
         }
+
         .icon-column img {
             width: 50px;
             height: 50px;
         }
+
         .pagination {
             margin-top: 20px;
         }
+
         .pagination a {
             margin: 0 5px;
             padding: 8px 16px;
@@ -53,9 +64,11 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .pagination a:hover {
             background-color: #f2f2f2;
         }
+
         .pagination a.disabled {
             pointer-events: none;
             color: #ccc;
@@ -81,6 +94,10 @@
     </script>
 </head>
 <body>
+<form id="logoutForm" action="/logout" method="POST" style="display: none;">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+<a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
 <table>
     <tr>
         <td>Id</td>

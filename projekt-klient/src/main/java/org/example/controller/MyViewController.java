@@ -5,12 +5,14 @@ import org.example.service.MyViewService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Controller
 public class MyViewController {
     private MyViewService myViewService;
@@ -19,11 +21,17 @@ public class MyViewController {
         this.myViewService = myViewService;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
     @GetMapping("view/items")
     public String viewSelected(Model model, @RequestParam int page) {
         List<Item> itemList = myViewService.findItems(page);
         model.addAttribute("itemList", itemList);
         model.addAttribute("page", page);
+        log.info("Fetching all items with page: {} and limit: 50", page);
         return "viewItems";
     }
 
@@ -31,6 +39,7 @@ public class MyViewController {
     public String viewItemsCreatedByUser(Model model) {
         List<Item> itemList = myViewService.findItemsCreatedByUser();
         model.addAttribute("itemList", itemList);
+        log.info("Fetching all items created by user");
         return "viewItems";
     }
 
@@ -38,6 +47,7 @@ public class MyViewController {
     public String viewClasses(Model model) {
         List<ItemClass> itemClassList = myViewService.findItemClasses();
         model.addAttribute("itemClassList", itemClassList);
+        log.info("Fetching all classes");
         return "viewClasses";
     }
 
@@ -45,6 +55,7 @@ public class MyViewController {
     public String viewSubclasses(Model model) {
         List<ItemSubclass> itemSubclassList = myViewService.findItemSubclasses();
         model.addAttribute("itemSubclassList", itemSubclassList);
+        log.info("Fetching all subclasses");
         return "viewSubclasses";
     }
 
@@ -53,6 +64,7 @@ public class MyViewController {
         List<ItemSpells> itemSpellsList = myViewService.findSelectedItemSpells(page);
         model.addAttribute("itemSpellsList", itemSpellsList);
         model.addAttribute("page", page);
+        log.info("Fetching all spells with page: {} and limit: 50", page);
         return "viewSpells";
     }
 
@@ -61,6 +73,7 @@ public class MyViewController {
         List<ItemSet> itemSetList = myViewService.findSelectedItemSets(page);
         model.addAttribute("page", page);
         model.addAttribute("itemSetList", itemSetList);
+        log.info("Fetching all sets with page: {} and limit: 50", page);
         return "viewSets";
     }
 
@@ -86,6 +99,7 @@ public class MyViewController {
             }
             item.setItemSpells(itemSpellsList);
             myViewService.addItem(item);
+            log.info("Creating new item {}", item.getName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -116,6 +130,7 @@ public class MyViewController {
             item.setItemSpells(itemSpellsList);
             item.setName(name);
             myViewService.editItem(item);
+            log.info("Editing item {}", item.getName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -125,6 +140,7 @@ public class MyViewController {
     @PostMapping("/item/delete")
     public String deleteItem(@RequestParam Long id) {
         myViewService.deleteItem(id);
+        log.info("Deleting item with id: {}", id);
         return "redirect:/view/itemscreatedbyuser";
     }
 
@@ -139,6 +155,7 @@ public class MyViewController {
     public String addItemClass(@ModelAttribute ItemClass itemClass) throws Exception {
         try {
             myViewService.addItemClass(itemClass);
+            log.info("Creating new itemClass {}", itemClass.getClassName());
         } catch (Exception e) {
             throw new Exception("Error adding itemClass: " + e.getMessage());
         }
@@ -156,6 +173,7 @@ public class MyViewController {
     public String editItemClass(@ModelAttribute ItemClass itemClass) throws Exception {
         try {
             myViewService.editItemClass(itemClass);
+            log.info("Editing itemClass {}", itemClass.getClassName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -165,6 +183,7 @@ public class MyViewController {
     @PostMapping("/itemclass/delete")
     public String deleteItemClass(@RequestParam Long id) {
         myViewService.deleteItemClass(id);
+        log.info("Deleting itemClass with id: {}", id);
         return "redirect:/view/classes";
     }
 
@@ -179,6 +198,7 @@ public class MyViewController {
     public String addItemSubclass(@ModelAttribute ItemSubclass itemSubclass) throws Exception {
         try {
             myViewService.addItemSubclass(itemSubclass);
+            log.info("Creating new itemSubclass {}", itemSubclass.getSubclassName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -197,6 +217,7 @@ public class MyViewController {
     public String editItemSubclass(@ModelAttribute ItemSubclass itemSubclass) throws Exception {
         try {
             myViewService.editItemSubclass(itemSubclass);
+            log.info("Editing itemSubclass {}", itemSubclass.getSubclassName());
         }catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -206,6 +227,7 @@ public class MyViewController {
     @PostMapping("/itemsubclass/delete")
     public String deleteItemSubclass(@RequestParam Long id) {
         myViewService.deleteItemSubclass(id);
+        log.info("Deleting itemSubclass with id: {}", id);
         return "redirect:/view/subclasses";
     }
 
@@ -219,6 +241,7 @@ public class MyViewController {
     public String addItemSet(@ModelAttribute ItemSet itemSet) throws Exception {
         try {
             myViewService.addItemSet(itemSet);
+            log.info("Creating new itemSet {}", itemSet.getSetName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -236,6 +259,7 @@ public class MyViewController {
     public String editItemSet(@ModelAttribute ItemSet itemSet) throws Exception {
         try {
             myViewService.editItemSet(itemSet);
+            log.info("Editing itemSet {}", itemSet.getSetName());
         }catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -245,6 +269,7 @@ public class MyViewController {
     @PostMapping("/itemset/delete")
     public String deleteItemSet(@RequestParam Long id) {
         myViewService.deleteItemSet(id);
+        log.info("Deleting itemSet with id: {}", id);
         return "redirect:/view/sets?page=0";
     }
 
@@ -258,6 +283,7 @@ public class MyViewController {
     public String addItemSpell(@ModelAttribute ItemSpells itemSpells) throws Exception {
         try {
             myViewService.addItemSpell(itemSpells);
+            log.info("Creating new itemSpell {}", itemSpells.getName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -275,6 +301,7 @@ public class MyViewController {
     public String editItemSpell(@ModelAttribute ItemSpells itemSpells) throws Exception {
         try {
             myViewService.editItemSpell(itemSpells);
+            log.info("Editing itemSpell {}", itemSpells.getName());
         } catch (Exception e) {
             throw new Exception("Error adding item: " + e.getMessage());
         }
@@ -284,6 +311,7 @@ public class MyViewController {
     @PostMapping("/itemspell/delete")
     public String deleteItemSpell(@RequestParam Long id) {
         myViewService.deleteItemSpell(id);
+        log.info("Deleting itemSpell with id: {}", id);
         return "redirect:/view/spells?page=0";
     }
 }

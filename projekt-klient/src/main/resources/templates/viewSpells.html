@@ -49,6 +49,10 @@
     </style>
 </head>
 <body>
+<form id="logoutForm" action="/logout" method="POST" style="display: none;">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+<a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
 <table>
     <thead>
     <tr>

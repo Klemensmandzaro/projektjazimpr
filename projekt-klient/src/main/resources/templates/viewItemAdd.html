@@ -47,6 +47,12 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        h1 {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -88,7 +94,7 @@
                 const spellDescription = selectedOption.getAttribute("data-description");
                 const spellId = selectedOption.getAttribute("data-id");
 
-                // Check if the spell is already added
+
                 const existingSpell = Array.from(document.querySelectorAll("#spell-details li")).find(
                     (item) => item.getAttribute("data-id") === spellId
                 );
@@ -98,19 +104,19 @@
                     return;
                 }
 
-                // Add the spell to the list
+
                 const listItem = document.createElement("li");
                 listItem.setAttribute("data-id", spellId);
                 listItem.innerHTML = `<strong>${selectedSpellName}</strong>: ${spellDescription}`;
                 spellDetails.appendChild(listItem);
 
-                // Update the hidden input value
+
                 const selectedSpellsInput = document.getElementById("selected-spells-input");
                 const currentValues = selectedSpellsInput.value ? selectedSpellsInput.value.split(",") : [];
                 currentValues.push(spellId);
                 selectedSpellsInput.value = currentValues.join(",");
 
-                // Clear the input field
+
                 spellSearch.value = "";
             });
 
@@ -118,6 +124,10 @@
     </script>
 </head>
 <body>
+<form id="logoutForm" action="/logout" method="POST" style="display: none;">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+<a href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>
 <h1 id="naglowek">Formularz dodawania dla Przedmiotów</h1>
 <div class="table-container">
     <form action="#" th:action="@{/item/add}" th:object="${item}" method="post">

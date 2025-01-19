@@ -86,7 +86,7 @@ public class ItemService {
         }
     }
 
-    private boolean processResponse(String response, String accessToken) {
+    public boolean processResponse(String response, String accessToken) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -94,7 +94,6 @@ public class ItemService {
             JsonNode items = rootNode.path("results");
 
             for (JsonNode itemNode : items) {
-                // Mapuj dane JSON na DTO
                 String key = itemNode.path("key").path("href").asText();
                 var itemResponse = webClient.get()
                         .uri(key)
@@ -123,7 +122,6 @@ public class ItemService {
 
                 ItemDto itemDto = mapToDto(itemNodeReal, mediaLink);
 
-                // Mapuj DTO na encję i zapisz do bazy danych
                 Item item = itemMapper.map(itemDto);
                 if (itemRepository.findByBlizzardId(item.getBlizzardId()).isEmpty())
                 {
@@ -139,7 +137,7 @@ public class ItemService {
 
             }
 
-            // Sprawdź, czy są kolejne strony
+
             return !(rootNode.path("pageCount").asInt() == rootNode.path("page").asInt());
         } catch (Exception e) {
             e.printStackTrace();
@@ -164,12 +162,12 @@ public class ItemService {
         itemSubclassDto.setName(itemNode.path("item_subclass").path("name").path("en_US").asText());
         itemDto.setItemSubclass(itemSubclassDto);
 
-        // Mapuj statystyki
+
         ItemStatsDto itemStatsDto = new ItemStatsDto();
         JsonNode statsNode = itemNode.path("preview_item").path("stats");
         if (statsNode.isArray()) {
             for (JsonNode stat : statsNode) {
-                String statType = stat.path("type").path("type").asText(); // Użycie klucza "type" -> "type"
+                String statType = stat.path("type").path("type").asText();
                 int statValue = stat.path("value").asInt();
 
                 switch (statType.toLowerCase()) {
@@ -300,12 +298,12 @@ public class ItemService {
 
         itemDto.setItemStats(itemStatsDto);
 
-        // Mapuj media
+
         ItemMediaDto itemMediaDto = new ItemMediaDto();
         itemMediaDto.setMediaUrl(mediaLink);
         itemDto.setItemMedia(itemMediaDto);
 
-        // Mapuj zestawy
+
         ItemSetDto itemSetDto = new ItemSetDto();
         if (itemNode.path("preview_item").has("set")) {
             itemSetDto.setName(itemNode.path("preview_item").path("set").path("item_set").path("name").path("en_US").asText());
