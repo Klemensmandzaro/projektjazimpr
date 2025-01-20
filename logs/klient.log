@@ -2765,3 +2765,448 @@ This generated password is for development use only. Your security configuration
 2025-01-19 22:45:58 - Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-01-19 22:45:58 - HikariPool-1 - Shutdown initiated...
 2025-01-19 22:45:58 - HikariPool-1 - Shutdown completed.
+2025-01-20 09:40:13 - Starting Main using Java 21.0.4 with PID 3048 (C:\Users\s30277\Desktop\projekt\projektjazimpr\projekt-klient\build\classes\java\main started by s30277 in C:\Users\s30277\Desktop\projekt\projektjazimpr)
+2025-01-20 09:40:13 - No active profile set, falling back to 1 default profile: "default"
+2025-01-20 09:40:14 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-20 09:40:14 - Finished Spring Data repository scanning in 162 ms. Found 7 JPA repository interfaces.
+2025-01-20 09:40:14 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-20 09:40:14 - Finished Spring Data repository scanning in 13 ms. Found 7 JPA repository interfaces.
+2025-01-20 09:40:15 - Tomcat initialized with port 8080 (http)
+2025-01-20 09:40:15 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-20 09:40:15 - Starting service [Tomcat]
+2025-01-20 09:40:15 - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-01-20 09:40:15 - Initializing Spring embedded WebApplicationContext
+2025-01-20 09:40:15 - Root WebApplicationContext: initialization completed in 1510 ms
+2025-01-20 09:40:15 - HikariPool-1 - Starting...
+2025-01-20 09:40:15 - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@550c973e
+2025-01-20 09:40:15 - HikariPool-1 - Start completed.
+2025-01-20 09:40:15 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-20 09:40:15 - HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-01-20 09:40:15 - HHH000026: Second-level cache disabled
+2025-01-20 09:40:16 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-20 09:40:16 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-01-20 09:40:17 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-20 09:40:17 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-20 09:40:17 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-20 09:40:18 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-01-20 09:40:18 - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/login?error=true']
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/perform_login']
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/login']
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for Ant [pattern='/logout', POST]
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/login?logout=true']
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for Deferred [Mvc [pattern='/login'], Ant [pattern='/login']]
+2025-01-20 09:40:18 - Adding web access control expression [permitAll] for Deferred [Mvc [pattern='/css/**'], Ant [pattern='/css/**']]
+2025-01-20 09:40:18 - Adding web access control expression [authenticated] for any request
+2025-01-20 09:40:18 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CsrfFilter, LogoutFilter, UsernamePasswordAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, FilterSecurityInterceptor
+2025-01-20 09:40:19 - Starting ProtocolHandler ["http-nio-8080"]
+2025-01-20 09:40:19 - Tomcat started on port 8080 (http) with context path '/'
+2025-01-20 09:40:19 - Started Main in 6.019 seconds (process running for 6.791)
+2025-01-20 09:40:31 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-20 09:40:31 - Initializing Servlet 'dispatcherServlet'
+2025-01-20 09:40:31 - Completed initialization in 1 ms
+2025-01-20 09:40:31 - Securing GET /view/items?page=0
+2025-01-20 09:40:31 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:40:31 - Failed to authorize filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:40:31 - Saved request http://localhost:8080/view/items?page=0&continue to session
+2025-01-20 09:40:31 - Redirecting to http://localhost:8080/login
+2025-01-20 09:40:31 - Securing GET /login
+2025-01-20 09:40:31 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:40:31 - Authorized filter invocation [GET /login] with attributes [permitAll]
+2025-01-20 09:40:31 - Secured GET /login
+2025-01-20 09:40:31 - Securing GET /favicon.ico
+2025-01-20 09:40:31 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:40:31 - Failed to authorize filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:40:31 - Redirecting to http://localhost:8080/login
+2025-01-20 09:40:31 - Securing GET /login
+2025-01-20 09:40:31 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:40:31 - Authorized filter invocation [GET /login] with attributes [permitAll]
+2025-01-20 09:40:31 - Secured GET /login
+2025-01-20 09:40:38 - Securing POST /perform_login
+2025-01-20 09:40:38 - Authenticated user
+2025-01-20 09:40:38 - Changed session id from E42F0CEF68B1FD944ADA75D76021502B
+2025-01-20 09:40:38 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@6616954d]
+2025-01-20 09:40:38 - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]
+2025-01-20 09:40:38 - Redirecting to /view/items?page=0
+2025-01-20 09:40:38 - Securing GET /view/items?page=0
+2025-01-20 09:40:38 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:40:38 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:40:38 - Secured GET /view/items?page=0
+2025-01-20 09:40:38 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:40:39 - Securing GET /favicon.ico
+2025-01-20 09:40:39 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:40:39 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:40:39 - Secured GET /favicon.ico
+2025-01-20 09:40:49 - Securing GET /view/items?page=1
+2025-01-20 09:40:49 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:40:49 - Authorized filter invocation [GET /view/items?page=1] with attributes [authenticated]
+2025-01-20 09:40:49 - Secured GET /view/items?page=1
+2025-01-20 09:40:49 - Fetching all items with page: 1 and limit: 50
+2025-01-20 09:40:50 - Securing GET /favicon.ico
+2025-01-20 09:40:50 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:40:50 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:40:50 - Secured GET /favicon.ico
+2025-01-20 09:41:05 - Securing GET /view/items?page=0
+2025-01-20 09:41:05 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:05 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:41:05 - Secured GET /view/items?page=0
+2025-01-20 09:41:05 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:41:05 - Securing GET /favicon.ico
+2025-01-20 09:41:05 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:05 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:41:05 - Secured GET /favicon.ico
+2025-01-20 09:41:48 - Securing POST /item/delete?id=1
+2025-01-20 09:41:48 - Invalid CSRF token found for http://localhost:8080/item/delete?id=1
+2025-01-20 09:41:48 - Responding with 403 status code
+2025-01-20 09:41:48 - Securing POST /error?id=1
+2025-01-20 09:41:48 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:48 - Authorized filter invocation [POST /error?id=1] with attributes [authenticated]
+2025-01-20 09:41:48 - Secured POST /error?id=1
+2025-01-20 09:41:51 - Securing GET /view/items?page=0
+2025-01-20 09:41:51 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:51 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:41:51 - Secured GET /view/items?page=0
+2025-01-20 09:41:51 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:41:51 - Securing GET /favicon.ico
+2025-01-20 09:41:51 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:51 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:41:51 - Secured GET /favicon.ico
+2025-01-20 09:41:52 - Securing GET /view/items?page=0
+2025-01-20 09:41:52 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:52 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:41:52 - Secured GET /view/items?page=0
+2025-01-20 09:41:52 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:41:52 - Securing GET /favicon.ico
+2025-01-20 09:41:52 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:52 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:41:52 - Secured GET /favicon.ico
+2025-01-20 09:41:53 - Securing GET /view/items?page=0
+2025-01-20 09:41:53 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:53 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:41:53 - Secured GET /view/items?page=0
+2025-01-20 09:41:53 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:41:53 - Securing GET /favicon.ico
+2025-01-20 09:41:53 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:53 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:41:53 - Secured GET /favicon.ico
+2025-01-20 09:41:55 - Securing GET /view/items?page=0
+2025-01-20 09:41:55 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:55 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:41:55 - Secured GET /view/items?page=0
+2025-01-20 09:41:55 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:41:55 - Securing GET /favicon.ico
+2025-01-20 09:41:55 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:55 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:41:55 - Secured GET /favicon.ico
+2025-01-20 09:41:56 - Securing GET /view/items?page=0
+2025-01-20 09:41:56 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:56 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:41:56 - Secured GET /view/items?page=0
+2025-01-20 09:41:57 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:41:57 - Securing GET /favicon.ico
+2025-01-20 09:41:57 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:41:57 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:41:57 - Secured GET /favicon.ico
+2025-01-20 09:42:01 - Securing GET /view/items?page=1
+2025-01-20 09:42:01 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:01 - Authorized filter invocation [GET /view/items?page=1] with attributes [authenticated]
+2025-01-20 09:42:01 - Secured GET /view/items?page=1
+2025-01-20 09:42:01 - Fetching all items with page: 1 and limit: 50
+2025-01-20 09:42:01 - Securing GET /favicon.ico
+2025-01-20 09:42:01 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:01 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:42:01 - Secured GET /favicon.ico
+2025-01-20 09:42:05 - Securing POST /item/delete?id=96
+2025-01-20 09:42:05 - Invalid CSRF token found for http://localhost:8080/item/delete?id=96
+2025-01-20 09:42:05 - Responding with 403 status code
+2025-01-20 09:42:05 - Securing POST /error?id=96
+2025-01-20 09:42:05 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:05 - Authorized filter invocation [POST /error?id=96] with attributes [authenticated]
+2025-01-20 09:42:05 - Secured POST /error?id=96
+2025-01-20 09:42:52 - Securing POST /logout
+2025-01-20 09:42:52 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:52 - Logging out [UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=E42F0CEF68B1FD944ADA75D76021502B], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:52 - Invalidated session 6C3007A63026185989A4CCBD04207FC5
+2025-01-20 09:42:52 - Redirecting to /login?logout=true
+2025-01-20 09:42:52 - Securing GET /favicon.ico
+2025-01-20 09:42:52 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:42:52 - Failed to authorize filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:42:52 - Redirecting to http://localhost:8080/login
+2025-01-20 09:42:52 - Securing GET /login?logout=true
+2025-01-20 09:42:52 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:42:52 - Authorized filter invocation [GET /login?logout=true] with attributes [permitAll]
+2025-01-20 09:42:52 - Secured GET /login?logout=true
+2025-01-20 09:42:52 - Securing GET /login
+2025-01-20 09:42:52 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:42:52 - Authorized filter invocation [GET /login] with attributes [permitAll]
+2025-01-20 09:42:52 - Secured GET /login
+2025-01-20 09:42:52 - Securing GET /favicon.ico
+2025-01-20 09:42:52 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:42:52 - Failed to authorize filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:42:52 - Redirecting to http://localhost:8080/login
+2025-01-20 09:42:52 - Securing GET /login
+2025-01-20 09:42:52 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:42:52 - Authorized filter invocation [GET /login] with attributes [permitAll]
+2025-01-20 09:42:52 - Secured GET /login
+2025-01-20 09:42:53 - Securing POST /perform_login
+2025-01-20 09:42:53 - Authenticated user
+2025-01-20 09:42:53 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@6cca3574]
+2025-01-20 09:42:53 - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]
+2025-01-20 09:42:53 - Redirecting to /view/items?page=0
+2025-01-20 09:42:53 - Securing GET /view/items?page=0
+2025-01-20 09:42:53 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:53 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:42:53 - Secured GET /view/items?page=0
+2025-01-20 09:42:53 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:42:53 - Securing GET /favicon.ico
+2025-01-20 09:42:53 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:53 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:42:53 - Secured GET /favicon.ico
+2025-01-20 09:42:57 - Securing POST /item/delete?id=1
+2025-01-20 09:42:57 - Invalid CSRF token found for http://localhost:8080/item/delete?id=1
+2025-01-20 09:42:57 - Responding with 403 status code
+2025-01-20 09:42:57 - Securing POST /error?id=1
+2025-01-20 09:42:57 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:57 - Authorized filter invocation [POST /error?id=1] with attributes [authenticated]
+2025-01-20 09:42:57 - Secured POST /error?id=1
+2025-01-20 09:42:59 - Securing GET /view/items?page=0
+2025-01-20 09:42:59 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:59 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:42:59 - Secured GET /view/items?page=0
+2025-01-20 09:42:59 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:42:59 - Securing GET /favicon.ico
+2025-01-20 09:42:59 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:59 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:42:59 - Secured GET /favicon.ico
+2025-01-20 09:42:59 - Securing GET /view/items?page=0
+2025-01-20 09:42:59 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:59 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:42:59 - Secured GET /view/items?page=0
+2025-01-20 09:42:59 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:42:59 - Securing GET /favicon.ico
+2025-01-20 09:42:59 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:42:59 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:42:59 - Secured GET /favicon.ico
+2025-01-20 09:43:06 - Securing GET /view/itemadd
+2025-01-20 09:43:06 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:06 - Authorized filter invocation [GET /view/itemadd] with attributes [authenticated]
+2025-01-20 09:43:06 - Secured GET /view/itemadd
+2025-01-20 09:43:06 - Securing GET /favicon.ico
+2025-01-20 09:43:06 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:06 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:43:06 - Secured GET /favicon.ico
+2025-01-20 09:43:41 - Securing POST /item/add
+2025-01-20 09:43:41 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:41 - Authorized filter invocation [POST /item/add] with attributes [authenticated]
+2025-01-20 09:43:41 - Secured POST /item/add
+2025-01-20 09:43:41 - Creating new item Maciek
+2025-01-20 09:43:41 - Securing GET /view/itemscreatedbyuser
+2025-01-20 09:43:41 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:41 - Authorized filter invocation [GET /view/itemscreatedbyuser] with attributes [authenticated]
+2025-01-20 09:43:41 - Secured GET /view/itemscreatedbyuser
+2025-01-20 09:43:41 - Fetching all items created by user
+2025-01-20 09:43:41 - Securing GET /favicon.ico
+2025-01-20 09:43:41 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:41 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:43:41 - Secured GET /favicon.ico
+2025-01-20 09:43:46 - Securing POST /item/delete?id=97
+2025-01-20 09:43:46 - Invalid CSRF token found for http://localhost:8080/item/delete?id=97
+2025-01-20 09:43:46 - Responding with 403 status code
+2025-01-20 09:43:46 - Securing POST /error?id=97
+2025-01-20 09:43:46 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:46 - Authorized filter invocation [POST /error?id=97] with attributes [authenticated]
+2025-01-20 09:43:46 - Secured POST /error?id=97
+2025-01-20 09:43:56 - Securing GET /view/itemclassadd
+2025-01-20 09:43:56 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:56 - Authorized filter invocation [GET /view/itemclassadd] with attributes [authenticated]
+2025-01-20 09:43:56 - Secured GET /view/itemclassadd
+2025-01-20 09:43:56 - Securing GET /favicon.ico
+2025-01-20 09:43:56 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:43:56 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:43:56 - Secured GET /favicon.ico
+2025-01-20 09:44:01 - Securing POST /itemclass/add
+2025-01-20 09:44:01 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:44:01 - Authorized filter invocation [POST /itemclass/add] with attributes [authenticated]
+2025-01-20 09:44:01 - Secured POST /itemclass/add
+2025-01-20 09:44:01 - Creating new itemClass Statek
+2025-01-20 09:44:01 - Securing GET /view/classes
+2025-01-20 09:44:01 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:44:01 - Authorized filter invocation [GET /view/classes] with attributes [authenticated]
+2025-01-20 09:44:01 - Secured GET /view/classes
+2025-01-20 09:44:01 - Fetching all classes
+2025-01-20 09:44:01 - Securing GET /favicon.ico
+2025-01-20 09:44:01 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:44:01 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:44:01 - Secured GET /favicon.ico
+2025-01-20 09:44:03 - Securing POST /itemclass/delete
+2025-01-20 09:44:03 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:44:03 - Authorized filter invocation [POST /itemclass/delete] with attributes [authenticated]
+2025-01-20 09:44:03 - Secured POST /itemclass/delete
+2025-01-20 09:44:03 - Deleting itemClass with id: 8
+2025-01-20 09:44:03 - Securing GET /view/classes
+2025-01-20 09:44:03 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:44:03 - Authorized filter invocation [GET /view/classes] with attributes [authenticated]
+2025-01-20 09:44:03 - Secured GET /view/classes
+2025-01-20 09:44:03 - Fetching all classes
+2025-01-20 09:44:03 - Securing GET /favicon.ico
+2025-01-20 09:44:03 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:44:03 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:44:03 - Secured GET /favicon.ico
+2025-01-20 09:46:44 - Securing GET /view/itemadd
+2025-01-20 09:46:44 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:46:44 - Authorized filter invocation [GET /view/itemadd] with attributes [authenticated]
+2025-01-20 09:46:44 - Secured GET /view/itemadd
+2025-01-20 09:46:44 - Securing GET /favicon.ico
+2025-01-20 09:46:44 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:46:44 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:46:44 - Secured GET /favicon.ico
+2025-01-20 09:46:53 - Securing GET /view/itemedit
+2025-01-20 09:46:53 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:46:53 - Authorized filter invocation [GET /view/itemedit] with attributes [authenticated]
+2025-01-20 09:46:53 - Secured GET /view/itemedit
+2025-01-20 09:46:53 - Securing GET /favicon.ico
+2025-01-20 09:46:53 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:46:53 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:46:53 - Secured GET /favicon.ico
+2025-01-20 09:47:10 - Securing POST /item/edit
+2025-01-20 09:47:10 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:10 - Authorized filter invocation [POST /item/edit] with attributes [authenticated]
+2025-01-20 09:47:10 - Secured POST /item/edit
+2025-01-20 09:47:10 - Editing item Maciek
+2025-01-20 09:47:10 - Securing GET /view/itemscreatedbyuser
+2025-01-20 09:47:10 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:10 - Authorized filter invocation [GET /view/itemscreatedbyuser] with attributes [authenticated]
+2025-01-20 09:47:10 - Secured GET /view/itemscreatedbyuser
+2025-01-20 09:47:10 - Fetching all items created by user
+2025-01-20 09:47:10 - Securing GET /favicon.ico
+2025-01-20 09:47:10 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:10 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:47:10 - Secured GET /favicon.ico
+2025-01-20 09:47:22 - Securing GET /view/itemsetadd
+2025-01-20 09:47:22 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:22 - Authorized filter invocation [GET /view/itemsetadd] with attributes [authenticated]
+2025-01-20 09:47:22 - Secured GET /view/itemsetadd
+2025-01-20 09:47:22 - Securing GET /favicon.ico
+2025-01-20 09:47:22 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:22 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:47:22 - Secured GET /favicon.ico
+2025-01-20 09:47:48 - Securing POST /itemset/add
+2025-01-20 09:47:48 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:48 - Authorized filter invocation [POST /itemset/add] with attributes [authenticated]
+2025-01-20 09:47:48 - Secured POST /itemset/add
+2025-01-20 09:47:48 - Creating new itemSet Kapibara
+2025-01-20 09:47:48 - Securing GET /view/sets?page=0
+2025-01-20 09:47:48 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:48 - Authorized filter invocation [GET /view/sets?page=0] with attributes [authenticated]
+2025-01-20 09:47:48 - Secured GET /view/sets?page=0
+2025-01-20 09:47:48 - Fetching all sets with page: 0 and limit: 50
+2025-01-20 09:47:48 - Securing GET /favicon.ico
+2025-01-20 09:47:48 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:47:48 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:47:48 - Secured GET /favicon.ico
+2025-01-20 09:49:12 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-20 09:49:12 - HikariPool-1 - Shutdown initiated...
+2025-01-20 09:49:12 - HikariPool-1 - Shutdown completed.
+2025-01-20 09:49:17 - Starting Main using Java 21.0.4 with PID 4696 (C:\Users\s30277\Desktop\projekt\projektjazimpr\projekt-klient\build\classes\java\main started by s30277 in C:\Users\s30277\Desktop\projekt\projektjazimpr)
+2025-01-20 09:49:17 - No active profile set, falling back to 1 default profile: "default"
+2025-01-20 09:49:18 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-20 09:49:18 - Finished Spring Data repository scanning in 175 ms. Found 7 JPA repository interfaces.
+2025-01-20 09:49:18 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-20 09:49:18 - Finished Spring Data repository scanning in 14 ms. Found 7 JPA repository interfaces.
+2025-01-20 09:49:19 - Tomcat initialized with port 8080 (http)
+2025-01-20 09:49:19 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-20 09:49:19 - Starting service [Tomcat]
+2025-01-20 09:49:19 - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-01-20 09:49:19 - Initializing Spring embedded WebApplicationContext
+2025-01-20 09:49:19 - Root WebApplicationContext: initialization completed in 1565 ms
+2025-01-20 09:49:19 - HikariPool-1 - Starting...
+2025-01-20 09:49:19 - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@1f949ab9
+2025-01-20 09:49:19 - HikariPool-1 - Start completed.
+2025-01-20 09:49:19 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-20 09:49:19 - HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-01-20 09:49:19 - HHH000026: Second-level cache disabled
+2025-01-20 09:49:20 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-20 09:49:20 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-01-20 09:49:21 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-20 09:49:21 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-20 09:49:21 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-01-20 09:49:22 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-01-20 09:49:22 - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/login?error=true']
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/perform_login']
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/login']
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for Ant [pattern='/logout', POST]
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for ExactUrl [processUrl='/login?logout=true']
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for Deferred [Mvc [pattern='/login'], Ant [pattern='/login']]
+2025-01-20 09:49:22 - Adding web access control expression [permitAll] for Deferred [Mvc [pattern='/css/**'], Ant [pattern='/css/**']]
+2025-01-20 09:49:22 - Adding web access control expression [authenticated] for any request
+2025-01-20 09:49:22 - Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CsrfFilter, LogoutFilter, UsernamePasswordAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, ExceptionTranslationFilter, FilterSecurityInterceptor
+2025-01-20 09:49:23 - Starting ProtocolHandler ["http-nio-8080"]
+2025-01-20 09:49:23 - Tomcat started on port 8080 (http) with context path '/'
+2025-01-20 09:49:23 - Started Main in 5.951 seconds (process running for 6.495)
+2025-01-20 09:49:27 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-20 09:49:27 - Initializing Servlet 'dispatcherServlet'
+2025-01-20 09:49:27 - Completed initialization in 1 ms
+2025-01-20 09:49:27 - Securing GET /view/sets?page=0
+2025-01-20 09:49:27 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:49:27 - Failed to authorize filter invocation [GET /view/sets?page=0] with attributes [authenticated]
+2025-01-20 09:49:27 - Saved request http://localhost:8080/view/sets?page=0&continue to session
+2025-01-20 09:49:27 - Redirecting to http://localhost:8080/login
+2025-01-20 09:49:27 - Securing GET /login
+2025-01-20 09:49:27 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:49:27 - Authorized filter invocation [GET /login] with attributes [permitAll]
+2025-01-20 09:49:27 - Secured GET /login
+2025-01-20 09:49:27 - Securing GET /favicon.ico
+2025-01-20 09:49:27 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:49:27 - Failed to authorize filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:49:27 - Redirecting to http://localhost:8080/login
+2025-01-20 09:49:27 - Securing GET /login
+2025-01-20 09:49:27 - Set SecurityContextHolder to anonymous SecurityContext
+2025-01-20 09:49:27 - Authorized filter invocation [GET /login] with attributes [permitAll]
+2025-01-20 09:49:27 - Secured GET /login
+2025-01-20 09:49:28 - Securing POST /perform_login
+2025-01-20 09:49:28 - Authenticated user
+2025-01-20 09:49:28 - Changed session id from D669DD04FD7A9362AB99052F93740254
+2025-01-20 09:49:28 - Stored SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]] to HttpSession [org.apache.catalina.session.StandardSessionFacade@77c9da7f]
+2025-01-20 09:49:28 - Set SecurityContextHolder to UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]
+2025-01-20 09:49:28 - Redirecting to /view/items?page=0
+2025-01-20 09:49:28 - Securing GET /view/items?page=0
+2025-01-20 09:49:28 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:28 - Authorized filter invocation [GET /view/items?page=0] with attributes [authenticated]
+2025-01-20 09:49:28 - Secured GET /view/items?page=0
+2025-01-20 09:49:29 - Fetching all items with page: 0 and limit: 50
+2025-01-20 09:49:29 - Securing GET /favicon.ico
+2025-01-20 09:49:29 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:29 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:49:29 - Secured GET /favicon.ico
+2025-01-20 09:49:31 - Securing POST /item/delete
+2025-01-20 09:49:31 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:31 - Authorized filter invocation [POST /item/delete] with attributes [authenticated]
+2025-01-20 09:49:31 - Secured POST /item/delete
+2025-01-20 09:49:31 - Deleting item with id: 1
+2025-01-20 09:49:31 - Securing GET /view/itemscreatedbyuser
+2025-01-20 09:49:31 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:31 - Authorized filter invocation [GET /view/itemscreatedbyuser] with attributes [authenticated]
+2025-01-20 09:49:31 - Secured GET /view/itemscreatedbyuser
+2025-01-20 09:49:31 - Fetching all items created by user
+2025-01-20 09:49:31 - Securing GET /favicon.ico
+2025-01-20 09:49:31 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:31 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:49:31 - Secured GET /favicon.ico
+2025-01-20 09:49:37 - Securing POST /item/delete
+2025-01-20 09:49:37 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:37 - Authorized filter invocation [POST /item/delete] with attributes [authenticated]
+2025-01-20 09:49:37 - Secured POST /item/delete
+2025-01-20 09:49:37 - Deleting item with id: 97
+2025-01-20 09:49:37 - Securing GET /view/itemscreatedbyuser
+2025-01-20 09:49:37 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:37 - Authorized filter invocation [GET /view/itemscreatedbyuser] with attributes [authenticated]
+2025-01-20 09:49:37 - Secured GET /view/itemscreatedbyuser
+2025-01-20 09:49:37 - Fetching all items created by user
+2025-01-20 09:49:37 - Securing GET /favicon.ico
+2025-01-20 09:49:37 - Retrieved SecurityContextImpl [Authentication=UsernamePasswordAuthenticationToken [Principal=org.springframework.security.core.userdetails.User [Username=admin, Password=[PROTECTED], Enabled=true, AccountNonExpired=true, CredentialsNonExpired=true, AccountNonLocked=true, Granted Authorities=[ROLE_USER]], Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=D669DD04FD7A9362AB99052F93740254], Granted Authorities=[ROLE_USER]]]
+2025-01-20 09:49:37 - Authorized filter invocation [GET /favicon.ico] with attributes [authenticated]
+2025-01-20 09:49:37 - Secured GET /favicon.ico
+2025-01-20 09:51:05 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-20 09:51:05 - HikariPool-1 - Shutdown initiated...
+2025-01-20 09:51:05 - HikariPool-1 - Shutdown completed.

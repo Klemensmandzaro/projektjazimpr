@@ -244,7 +244,10 @@
             </table>
         </td>
         <td>
-            <button name="id" th:id="${iter.index+1}+ '-delete'" th:onclick="deleteItem([[${item.id}]])">Delete</button>
+            <form th:action="@{/item/delete}" method="post">
+                <input type="hidden" name="id"  th:value="${item.id}" />
+                <input type="submit" th:id="${iter.index+1}+ '-delete'"  value="Delete" />
+            </form>
         </td>
     </tr>
 </table>
