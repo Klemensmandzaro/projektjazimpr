@@ -4,7 +4,9 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +23,7 @@ public class MyPageTest {
     public void tearDown() {
         this.webDriver.close();
     }
+
 
     @Test
     @Order(1)
@@ -169,7 +172,7 @@ public class MyPageTest {
 
     @Test
     @Order(13)
-    public void testSpellAddInputs() throws InterruptedException {
+    public void testSpellAddInputs() throws InterruptedException {;
         MyPageItemSpellsForm myPage = new MyPageItemSpellsForm(webDriver).openAdd();
         Thread.sleep(3000);
         assertTrue(myPage.isHeaderDisplayed());

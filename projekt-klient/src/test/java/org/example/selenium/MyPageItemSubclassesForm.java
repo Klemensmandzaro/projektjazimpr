@@ -32,6 +32,21 @@ public class MyPageItemSubclassesForm {
     
     @FindBy(id="naglowek")
     private WebElement header;
+
+    @FindBy(id="username")
+    WebElement username;
+
+    @FindBy(id="password")
+    WebElement password;
+
+    @FindBy(id="login-button")
+    WebElement loginButton;
+
+    public void logIn(){
+        this.username.sendKeys("admin");
+        this.password.sendKeys("password");
+        this.loginButton.click();
+    }
     
     
     public MyPageItemSubclassesForm(WebDriver webDriver) {
@@ -39,12 +54,18 @@ public class MyPageItemSubclassesForm {
         PageFactory.initElements(webDriver, this);
     }
 
-    public MyPageItemSubclassesForm openAdd() {
+    public MyPageItemSubclassesForm openAdd() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemsubclassadd");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemsubclassadd");
         return this;
     }
 
-    public MyPageItemSubclassesForm openEdit() {
+    public MyPageItemSubclassesForm openEdit() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemsubclassedit");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemsubclassedit");
         return this;
     }

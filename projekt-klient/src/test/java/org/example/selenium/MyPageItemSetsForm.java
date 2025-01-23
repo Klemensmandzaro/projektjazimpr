@@ -33,18 +33,38 @@ public class MyPageItemSetsForm {
     @FindBy(id="name")
     private WebElement editNameInput;
 
+    @FindBy(id="username")
+    WebElement username;
+
+    @FindBy(id="password")
+    WebElement password;
+
+    @FindBy(id="login-button")
+    WebElement loginButton;
+
+    public void logIn(){
+        this.username.sendKeys("admin");
+        this.password.sendKeys("password");
+        this.loginButton.click();
+    }
 
     public MyPageItemSetsForm(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
-    public MyPageItemSetsForm openAdd() {
+    public MyPageItemSetsForm openAdd() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemsetadd");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemsetadd");
         return this;
     }
 
-    public MyPageItemSetsForm openEdit() {
+    public MyPageItemSetsForm openEdit() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemsetedit");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemsetedit");
         return this;
     }

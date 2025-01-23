@@ -162,20 +162,39 @@ public class MyPageItemsForm {
     @FindBy(id="add-spell")
     private WebElement addSpellButton;
 
+    @FindBy(id="username")
+    WebElement username;
 
+    @FindBy(id="password")
+    WebElement password;
+
+    @FindBy(id="login-button")
+    WebElement loginButton;
+
+    public void logIn(){
+        this.username.sendKeys("admin");
+        this.password.sendKeys("password");
+        this.loginButton.click();
+    }
 
     public MyPageItemsForm(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
-    public MyPageItemsForm openAdd() {
+    public MyPageItemsForm openAdd() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemadd");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemadd");
         return this;
     }
 
-    public MyPageItemsForm openEdit() {
+    public MyPageItemsForm openEdit() throws InterruptedException {
         webDriver.navigate().to("http://localhost:8080/view/itemedit");
+        logIn();
+        Thread.sleep(1000);
+        webDriver.navigate().to("http://localhost:8080/view/itemadd");
         return this;
     }
 
@@ -191,7 +210,7 @@ public class MyPageItemsForm {
         return this;
     }
 
-    public boolean isHeaderDisplayed() {
+    public boolean isHeaderDisplayed() throws InterruptedException {
         return header.isDisplayed();
     }
 

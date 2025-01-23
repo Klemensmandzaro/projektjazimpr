@@ -33,17 +33,38 @@ public class MyPageItemSpellsForm {
     @FindBy(id="naglowek")
     private WebElement header;
 
+    @FindBy(id="username")
+    WebElement username;
+
+    @FindBy(id="password")
+    WebElement password;
+
+    @FindBy(id="login-button")
+    WebElement loginButton;
+
+    public void logIn(){
+        this.username.sendKeys("admin");
+        this.password.sendKeys("password");
+        this.loginButton.click();
+    }
+
     public MyPageItemSpellsForm(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
-    public MyPageItemSpellsForm openAdd() {
+    public MyPageItemSpellsForm openAdd() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemspelladd");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemspelladd");
         return this;
     }
 
-    public MyPageItemSpellsForm openEdit() {
+    public MyPageItemSpellsForm openEdit() throws InterruptedException {
+        webDriver.navigate().to("http://localhost:8080/view/itemspelledit");
+        logIn();
+        Thread.sleep(1000);
         webDriver.navigate().to("http://localhost:8080/view/itemspelledit");
         return this;
     }
